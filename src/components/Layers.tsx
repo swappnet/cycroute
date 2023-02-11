@@ -1,0 +1,68 @@
+import defaultIcn from "../assets/default-icon.svg";
+import satelliteIcn from "../assets/satellite-icon.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { changeLayer } from "../reducers/controlsReducer";
+import { addLatLng } from "../reducers/geocoderRed";
+
+export default function Layers() {
+  const layer = useSelector((state) => state.controlsReducer);
+  const dispatch = useDispatch();
+
+  const handleLayerChange = (e) => {
+    if (e === "toDefault") {
+      dispatch(
+        addLatLng({
+          lat: layer.currentCoords.lat,
+          lng: layer.currentCoords.lng,
+        })
+      );
+      window.scrollTo(0, 0);
+      dispatch(changeLayer("default"));
+    } else if (e === "toSatellite") {
+      dispatch(
+        addLatLng({
+          lat: layer.currentCoords.lat,
+          lng: layer.currentCoords.lng,
+        })
+      );
+      dispatch(changeLayer("satellite"));
+      window.scrollTo(0, 0);
+    }
+  };
+
+  return (
+    <>
+      <h2 className="content-section--title">Layers</h2>
+      <div className="content-layers--wrapper">
+        <div
+          className={
+            layer.layer === "default"
+              ? "content-layers-box active"
+              : "content-layers-box"
+          }
+          tabIndex={0}
+          role="button"
+          title="Default layer"
+          aria-label="Default layer"
+          onClick={() => handleLayerChange("toDefault")}
+        >
+          <img className="content-layers-box--icon" src={defaultIcn} alt="" />
+        </div>
+        <div
+          className={
+            layer.layer === "satellite"
+              ? "content-layers-box active"
+              : "content-layers-box"
+          }
+          tabIndex={0}
+          role="button"
+          title="Satellite layer"
+          aria-label="Satellite layer"
+          onClick={() => handleLayerChange("toSatellite")}
+        >
+          <img className="content-layers-box--icon" src={satelliteIcn} alt="" />
+        </div>
+      </div>
+    </>
+  );
+}

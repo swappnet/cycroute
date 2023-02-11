@@ -1,0 +1,201 @@
+@use "../abstracts" as *;
+
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+button {
+  font-family: $primary-font;
+  margin: 0;
+  text-decoration: none;
+}
+
+a {
+  color: rgba(163, 209, 104, 0.84);
+  &:active {
+    color: rgba(163, 209, 104, 0.84);
+  }
+  &:visited {
+    color: rgba(163, 209, 104, 0.84);
+  }
+  &:focus {
+    color: rgba(163, 209, 104, 0.84);
+  }
+  &:hover {
+    color: rgba(163, 209, 104, 0.84);
+  }
+}
+
+.header-title {
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  font-size: 2em;
+  line-height: 52px;
+  font-style: normal;
+  color: #a3d168;
+}
+
+.start-button {
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: -0.035em;
+}
+
+.content-draw-box--title {
+  @include themify($themes) {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.9em;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.035em;
+    color: themed(div-text0);
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+}
+
+.content-section--title {
+  @include themify($themes) {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.4em;
+    line-height: 32px;
+    text-align: center;
+    letter-spacing: -0.035em;
+    color: themed(text-6);
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+}
+
+.content-info--box--value {
+  @include themify($themes) {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: -0.035em;
+    color: themed(text-1);
+  }
+}
+
+.content-info--box--title {
+  @include themify($themes) {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    text-align: center;
+    letter-spacing: -0.035em;
+    color: themed(text-0);
+    .box--title--span {
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 1rem;
+      text-align: center;
+      letter-spacing: -0.035em;
+      color: themed(text-1);
+    }
+  }
+}
+
+.content-export--button {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: -0.035em;
+  color: rgba(249, 249, 249, 0.8);
+}
+
+.geocoder-result a {
+  @include themify($themes) {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: themed(text-2);
+  }
+}
+
+.geocoder-result--notfound {
+  @include themify($themes) {
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: themed(text-2);
+    font-family: $primary-font;
+    padding: 0.3em;
+  }
+}
+
+.content-geocoder--input {
+  @include themify($themes) {
+    font-family: $primary-font;
+    color: themed(text-3);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 24px;
+      text-align: start;
+      letter-spacing: -0.035em;
+      color: themed(text-4);
+    }
+  }
+}
+
+.start-copy {
+  @include themify($themes) {
+    bottom: 1rem;
+    font-family: $primary-font;
+    color: themed(text-7);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.8rem;
+  }
+}
+
+.content-export-download--title {
+  @include themify($themes) {
+    font-family: $primary-font;
+    color: themed(text-8);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+}
+
+.download-form--input {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.download-form--submit {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.9rem;
+}

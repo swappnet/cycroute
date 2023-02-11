@@ -1,0 +1,260 @@
+@use "../abstracts" as *;
+.start--wrapper {
+  @include themify($themes) {
+    @include flexCenter(column, 1rem);
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: themed(bg-0);
+    .start--wrapper-top {
+      @include flexCenter(column, 1rem);
+    }
+    .start--wrapper-bottom {
+      position: fixed;
+      bottom: 0.3rem;
+      @include flexCenter(column, 0.5rem);
+      @media (max-height: 550px) {
+        position: relative;
+      }
+    }
+    .start-image--wrapper {
+      @media (max-height: 550px) {
+        display: none;
+      }
+      max-width: 250px;
+      min-width: 200px;
+      .start-image {
+        width: 100%;
+      }
+    }
+  }
+  transition: background 0.2s linear;
+}
+
+.header--wrapper {
+  @include themify($themes) {
+    @include flexCenter(row, 0.2em);
+    background: themed(bg-0);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 3.2rem;
+    padding: 0.1em;
+    z-index: 2;
+    box-shadow: 0 0.06rem 0.4rem rgba(0, 0, 0, 0.25);
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    @include media($from: "sm") {
+      z-index: 1002;
+    }
+  }
+}
+
+.main-editor--wrapper {
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+.map--wrapper {
+  cursor: crosshair;
+  width: 100%;
+  position: fixed;
+  top: 3.2rem;
+  right: 0;
+  left: 0;
+  height: 130vw;
+  z-index: 1;
+  @include media($from: "sm") {
+    height: 100%;
+    margin-left: calc(18.75rem);
+    width: calc(100% - 18.75rem);
+  }
+}
+
+.map-controls--wrapper {
+  position: fixed;
+  right: 0.5rem;
+  top: 4rem;
+  @include flexCenter(column, 0.5rem);
+  z-index: 1000;
+  @media (max-height: 374px) {
+    @include flexCenter(row, 0.5rem);
+  }
+}
+
+.contributors-wrapper {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(0, 0, 0, 0.26);
+  padding: 0.1em 0.7em;
+  margin-right: 3.4rem;
+  border-radius: 10px;
+  z-index: 1001;
+  color: white;
+  gap: 0.4em;
+  top: 3.7rem;
+  left: 2rem;
+  font-family: $primary-font;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  flex-wrap: wrap;
+  @include media($from: "sm") {
+    left: 21rem;
+  }
+  .contributors-link {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+.editor--wrapper {
+  @include themify($themes) {
+    z-index: 1001;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+    padding-top: 0.5rem;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    background: themed(bg-0);
+    position: relative;
+    margin-top: calc(130vw + 3.2rem);
+    width: 100%;
+    overflow-y: scroll;
+    @include media($from: "sm") {
+      position: absolute;
+      max-width: 18.75rem;
+      left: 0;
+      top: 0;
+      margin-top: 3.1rem;
+      height: 100%;
+      z-index: 1000;
+    }
+
+    .content-arrow--wrapper {
+      width: 100%;
+      margin: 0.2rem auto 0.6rem;
+      @include flexCenter(row, 0px);
+      @include media($from: "sm") {
+        display: none;
+      }
+    }
+    .editor-content {
+      margin: 0 1rem;
+      @include flexCenter(column, 0px);
+      .content-section {
+        width: 100%;
+        @include flexCenter(column, 0.6rem);
+        padding: 1rem;
+        border-bottom: 1px solid themed(div-3);
+        &.export-section {
+          border-bottom: none;
+          margin-bottom: 2rem;
+        }
+        .content-draw--wrapper {
+          @include flexCenter(row, 1rem);
+          .content-draw-box {
+            @include flexCenter(column, 0.1rem);
+            background: themed(div-0);
+            border-radius: 10px;
+            padding: 0.3rem 0.7rem;
+            width: 100px;
+            cursor: pointer;
+            &.active {
+              background: themed(div-1);
+              border-radius: 10px;
+            }
+            @include on-hover {
+              background: themed(div-1);
+              transition: 0.1s ease-in;
+            }
+            .content-draw-box--icon {
+              max-width: 50px;
+              max-height: 50px;
+              width: 100%;
+            }
+          }
+        }
+        .content-info--wrapper {
+          @include flexCenter(row, 1rem);
+          width: 100%;
+          .content-info--box {
+            @include flexCenter(column, 0.5rem);
+            background: themed(div-2);
+            border-radius: 10px;
+            padding: 0.3em 0.5em;
+            max-width: 100px;
+            width: 100%;
+            .content-info--box--title {
+              @include flexCenter(row, 0.2em);
+              align-items: baseline;
+            }
+          }
+        }
+        .content-layers--wrapper {
+          @include flexCenter(row, 1rem);
+          .content-layers-box {
+            padding: 0.3rem 0.7rem;
+            width: 100px;
+            height: 70px;
+            @include flexCenter(row, 0px);
+            border-radius: 10px;
+            background: themed(div-0);
+            cursor: pointer;
+            &:hover,
+            &:focus {
+              background: themed(div-1);
+              transition: 0.1s ease-in;
+            }
+            .content-layers-box--icon {
+              max-width: 50px;
+              max-height: 50px;
+              width: 100%;
+            }
+            &.active {
+              background: themed(div-1);
+              cursor: default;
+            }
+          }
+        }
+        .content-export--wrapper {
+          @include flexCenter(row, 0.5rem);
+          width: 70%;
+          .content-export-download--wrapper {
+            @include media($from: "sm") {
+              bottom: 19rem;
+              max-width: 90%;
+            }
+            @include flexCenter(column, 0);
+            position: absolute;
+            bottom: 7rem;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            background: themed(div-4);
+            border-radius: 10px;
+            padding: 0.5rem;
+            max-width: 300px;
+            box-shadow: 0 0.06rem 0.4rem rgba(0, 0, 0, 0.25);
+            .download-form {
+              background: transparent;
+              @include flexCenter(column, 0.5rem);
+              width: 100%;
+              height: 100%;
+              margin-top: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

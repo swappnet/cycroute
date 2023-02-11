@@ -1,0 +1,213 @@
+@use "../abstracts" as *;
+
+//UNDO ICON
+.gg-undo {
+  @include themify($themes) {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 14px;
+    border: 2px solid;
+    border-left-color: transparent;
+    border-radius: 100px;
+    color: themed(icon-0);
+  }
+}
+
+.gg-undo::before {
+  @include themify($themes) {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    top: -3px;
+    left: -1px;
+    transform: rotate(-68deg);
+    color: themed(icon-0);
+  }
+}
+
+//REDO ICON
+.gg-redo {
+  @include themify($themes) {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 14px;
+    border: 2px solid;
+    border-right-color: transparent;
+    border-radius: 100px;
+    color: themed(icon-0);
+  }
+}
+.gg-redo::before {
+  @include themify($themes) {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    top: -3px;
+    right: -1px;
+    transform: rotate(68deg);
+    color: themed(icon-0);
+  }
+}
+
+//GEOCODER LOADING ICON
+
+.geocoder-loading {
+  right: 0.5rem;
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: rgba(130, 172, 76);
+  animation: spin 0.7s ease-in-out infinite;
+  -webkit-animation: spin 0.7s ease-in-out infinite;
+}
+
+.leaflet-routing-container {
+  display: none;
+}
+
+//SEARCH ICON
+
+.gg-search {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 16px;
+  border: 3px solid;
+  border-radius: 100%;
+  margin-left: -4px;
+  margin-top: -4px;
+  color: #9ebc78;
+  &::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 3px;
+    height: 7px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    top: 9px;
+    left: 11px;
+    color: #9ebc78;
+  }
+}
+
+.arrow {
+  @include themify($themes) {
+    background-color: themed(icon-2);
+    border-radius: 18px;
+    padding: 0.15rem 1rem;
+  }
+}
+
+//LOCATION ICON
+
+.gg-pin {
+  @include themify($themes) {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: rotate(45deg) scale(var(--ggs, 1));
+    width: 18px;
+    height: 18px;
+    border-radius: 100% 100% 0 100%;
+    border: 2px solid;
+    margin-top: -4px;
+    color: rgba(206, 183, 127, 0.59);
+    &::before {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 2px solid;
+      top: 3px;
+      left: 3px;
+      border-radius: 40px;
+      color: rgba(206, 183, 127, 0.59);
+    }
+  }
+}
+
+.found {
+  color: #b0e26f !important;
+  &::before {
+    color: #b0e26f !important;
+  }
+}
+
+//LOADING LOCATION ICON
+
+.gg-loadbar,
+.gg-loadbar::before {
+  display: block;
+  box-sizing: border-box;
+  height: 4px;
+}
+.gg-loadbar {
+  position: relative;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+}
+.gg-loadbar::before {
+  @include themify($themes) {
+    content: "";
+    position: absolute;
+    border-radius: 4px;
+    background: currentColor;
+    animation: loadbar 2s cubic-bezier(0, 0, 0.58, 1) infinite;
+    color: themed(icon-1);
+  }
+}
+
+//FOR ALL
+.disabled {
+  @include themify($themes) {
+    color: themed(icon-1);
+  }
+}
+
+.disabled::before {
+  @include themify($themes) {
+    color: themed(icon-1);
+  }
+}
+
+.disabled::after {
+  @include themify($themes) {
+    color: themed(icon-1);
+  }
+}
+
+//DARK MODE TOGGLERS
+
+.map-controls--icon--delete {
+  max-width: 50px;
+  width: 100%;
+  &.active {
+    filter: invert(8%) sepia(100%) saturate(7492%) hue-rotate(2deg)
+      brightness(98%) contrast(107%);
+  }
+}

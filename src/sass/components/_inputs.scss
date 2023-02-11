@@ -1,0 +1,92 @@
+@use "../abstracts" as *;
+
+.download-form--input {
+  @include themify($themes) {
+    max-width: 90%;
+    padding: 0.4rem;
+    border-radius: 10px;
+    border: 0px;
+    color: themed(input-7);
+    background: themed(input-6);
+  }
+}
+
+.content-geocoder--wrapper {
+  @include themify($themes) {
+    @include flexCenter(row, 0px);
+    max-width: 14rem;
+    width: 100%;
+    position: relative;
+    .content-geocoder--input {
+      color: themed(input-5);
+      background: themed(input-0);
+      border: none;
+      border-radius: 15px;
+      padding-left: 1rem;
+      padding-right: 3.5rem;
+      width: 100%;
+      height: 40px;
+      text-align: start;
+      font-size: 16px;
+      &::placeholder {
+        color: themed(input-8);
+        font-family: $primary-font;
+        font-weight: 400;
+      }
+    }
+    .content-geocoder--clear {
+      @include flexCenter(column, 0px);
+      position: absolute;
+      right: 0.5rem;
+      font-weight: 400;
+      font-size: 0.8rem;
+      width: 43px;
+      height: 23px;
+      border-radius: 7px;
+      color: themed(input-2);
+      background: themed(input-1);
+      cursor: pointer;
+    }
+    .content-geocoder--search--icon {
+      position: absolute;
+      right: 0.8rem;
+    }
+    .geocoder-results--wrapper {
+      .geocoder-results {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        background: themed(input-3);
+        border-radius: 10px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        overflow: hidden;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+        .geocoder-result {
+          @include flexCenter(column, 0.6rem);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.144);
+          &:first-child {
+            background: themed(input-4);
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+          &:hover {
+            background: themed(input-4);
+          }
+          a {
+            width: 100%;
+            cursor: pointer;
+            .geocoder-result--title {
+              width: 100%;
+              padding: 1rem;
+              @include flexCenter(column, 0);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@function color($colors, $keys...) {
+  @each $key in $keys {
+    $colors: map-get($colors, $key);
+  }
+  @return $colors;
+}

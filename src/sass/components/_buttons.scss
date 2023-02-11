@@ -1,0 +1,245 @@
+@use "../abstracts" as *;
+
+.start-button {
+  background: linear-gradient(91.88deg, #a3d168 6.89%, #6fc068 117.86%);
+  border-radius: 15px;
+  border: none;
+  padding: 1rem;
+  max-width: 250px;
+  width: 100%;
+  cursor: pointer;
+  @include on-hover {
+    background: linear-gradient(91.88deg, #a4d168e0 6.89%, #6fc068e5 117.86%);
+  }
+  -webkit-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
+  -moz-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
+  box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
+}
+
+.start-github--link {
+  @include flexCenter(row, 0.2em);
+  bottom: 3rem;
+  font-weight: 700;
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.content-export--button {
+  background: linear-gradient(91.88deg, #a3d168 6.89%, #6fc068 117.86%);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 14rem;
+  border: none;
+  box-shadow: 7px 19px 23px -24px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  @include on-hover {
+    background: linear-gradient(91.88deg, #a4d168e0 6.89%, #6fc068e5 117.86%);
+  }
+}
+.disabled-export {
+  @include themify($themes) {
+    background: themed(div-0);
+    cursor: default;
+    box-shadow: none;
+    @include on-hover {
+      background: themed(div-0);
+    }
+  }
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  width: 40px;
+  height: 80px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 50%;
+  @include media($from: "sm") {
+    bottom: 4rem;
+  }
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    @include themify($themes) {
+      width: 100% !important;
+      height: 50% !important;
+      color: themed(button-2) !important;
+      background-color: themed(button-0);
+      @include flexCenter(row, 0px);
+      @include on-hover {
+        background-color: themed(button-1) !important;
+        color: themed(button-2);
+        @include flexCenter(row, 0px);
+        -webkit-tap-highlight-color: transparent;
+      }
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      &:active,
+      &:hover {
+        @include flexCenter(row, 0px);
+        color: themed(button-2);
+        background-color: themed(button-1) !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+    }
+  }
+}
+
+.leaflet-bar a {
+  border-bottom: 1px solid rgba(204, 204, 204, 0.418);
+  &:hover {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.418);
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.leaflet-control-zoom-in {
+  border-radius: 50% 50% 0 0 !important;
+}
+
+.leaflet-control-zoom-out {
+  border-radius: 0 0 50% 50% !important;
+}
+
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 1rem;
+  @include flexCenter(column, 0.2rem);
+  font-family: $primary-font;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #a3d168;
+  .theme-switch {
+    display: inline-block;
+    height: 1.9rem;
+    position: relative;
+    width: 4rem;
+    input {
+      display: none;
+    }
+    .slider {
+      background-color: #ccc;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      background-color: #fff;
+      bottom: 3px;
+      content: "";
+      height: 1.5rem;
+      left: 4px;
+      position: absolute;
+      transition: 0.4s;
+      width: 1.5rem;
+    }
+    input:checked + .slider {
+      background-color: #a3d168;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(33px);
+    }
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  }
+}
+
+.download-form--submit {
+  @include themify($themes) {
+    cursor: pointer;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #a3d168;
+    color: #fff;
+  }
+}
+
+.download-form--close {
+  @include themify($themes) {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0.2rem;
+    padding: 0.3rem 0.7rem;
+    font-family: $primary-font;
+    color: themed(text-8);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
+
+.map-controls--button {
+  @include themify($themes) {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: themed(button-0);
+    padding: 0.7em;
+    border-radius: 50%;
+    border: none;
+    @include flexCenter(column, 0);
+    @include on-hover {
+      background-color: themed(button-1);
+    }
+    &:disabled {
+      cursor: default;
+      @include on-hover {
+        background-color: themed(button-0);
+      }
+    }
+    &:last-child {
+      margin-top: 1rem;
+      @media (max-height: 374px) {
+        margin-top: 0;
+      }
+    }
+    .map-controls--icon--svg {
+      width: 30px;
+    }
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.contributors-button {
+  cursor: pointer;
+  position: fixed;
+  z-index: 1000;
+  padding: 0.1em;
+  border-radius: 50%;
+  border: none;
+  width: 20px;
+  height: 20px;
+  font-weight: 500;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.26);
+  top: 3.7rem;
+  left: 0.5rem;
+  @include flexCenter(row, 0px);
+  @include media($from: "sm") {
+    left: 19.5rem;
+  }
+}

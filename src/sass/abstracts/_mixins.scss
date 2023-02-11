@@ -1,0 +1,121 @@
+@use "../abstracts/breakpoints" as *;
+
+@mixin flexCenter($direction, $gap) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+@mixin rst {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin centerAbs {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+@mixin on-hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin media($from: false, $until: false, $and: false, $media-type: all) {
+  $min-width: 0;
+  $max-width: 0;
+  $query: "";
+
+  //FROM: this breakpoint (inclusive)
+  @if $from {
+    @if type-of($from) == number {
+      $min-width: $from;
+    } @else {
+      $min-width: map-get($breakpoints, $from);
+    }
+  }
+
+  //UNTIL: this breakpoint (exclusive)
+  @if $until {
+    @if type-of($until) == number {
+      $max-width: $until - 1px;
+    } @else {
+      $max-width: map-get($breakpoints, $until) - 1px;
+    }
+  }
+
+  @if $min-width != 0 {
+    $query: "#{$query} and (min-width: #{$min-width})";
+  }
+  @if $max-width != 0 {
+    $query: "#{$query} and (max-width: #{$max-width})";
+  }
+  @if $and {
+    $query: "#{$query} and (#{$and})";
+  }
+
+  @if ($media-type == "all" and $query != "") {
+    $media-type: "";
+    $query: str-slice(unquote($query), 6);
+  }
+
+  @media #{$media-type + $query} {
+    @content;
+  }
+}
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes loadbar {
+  0%,
+  to {
+    left: 0;
+    right: 80%;
+  }
+  25%,
+  75% {
+    left: 0;
+    right: 0;
+  }
+  50% {
+    left: 80%;
+    right: 0;
+  }
+}
