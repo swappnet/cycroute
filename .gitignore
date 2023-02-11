@@ -7,10 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+
 node_modules
 dist
 dist-ssr
+*.txt
+*.cpuprofile
 *.local
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+TODOs.md
+.eslintcache
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +32,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+
