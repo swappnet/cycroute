@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IDrawCoords {
-  lat?: string;
-  lng?: string;
+  lat?: number;
+  lng?: number;
 }
 
 interface IDrawReducer {

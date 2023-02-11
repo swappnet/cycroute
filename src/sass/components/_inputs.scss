@@ -64,9 +64,11 @@
           &:hover {
             background: themed(input-4);
           }
-          a {
+          button {
             width: 100%;
             cursor: pointer;
+            background-color: transparent;
+            border: none;
             .geocoder-result--title {
               width: 100%;
               padding: 1rem;

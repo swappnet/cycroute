@@ -4,15 +4,17 @@ import { addLatLng } from "../reducers/geocoderRed";
 import { changeCurrentCoords } from "../reducers/controlsReducer";
 
 export default function Geocoder() {
-  const ref = useRef(null);
-  const [geocoderValue, setGeocoderValue] = useState("");
-  const [geocoderResponse, setGeocoderResponse] = useState([]);
-  const [isGeocoderLoading, setIsGeocoderLoading] = useState(false);
-  const [isResultsOpen, setIsResultsOpen] = useState(false);
+  const ref = useRef<HTMLFormElement>(null);
+  const [geocoderValue, setGeocoderValue] = useState<string>("");
+  const [geocoderResponse, setGeocoderResponse] = useState<any>(null);
+  const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false);
+  const [isResultsOpen, setIsResultsOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
-  const handleChangeGeocoder = (e) => {
+  const handleChangeGeocoder = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setGeocoderValue(e.target.value);
   };
 
@@ -24,7 +26,7 @@ export default function Geocoder() {
     setGeocoderValue("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
   };
 
@@ -46,21 +48,26 @@ export default function Geocoder() {
   };
 
   useEffect(() => {
-    //Fetch location after 1.1 sec after state updated
-    if (geocoderValue.length >= 3) {
-      const timer = setTimeout(() => {
-        fetchGeoData();
-      }, 1100);
-      return () => clearTimeout(timer);
-    } else if (geocoderValue.length === 0) {
-      setGeocoderResponse([]);
+    if (geocoderValue) {
+      if (geocoderValue.length >= 3) {
+        const timer = setTimeout(() => {
+          fetchGeoData();
+        }, 400);
+        return () => clearTimeout(timer);
+      } else if (geocoderValue.length === 0) {
+        setGeocoderResponse([]);
+      }
     }
   }, [geocoderValue]);
 
   useEffect(() => {
     //Close results windows if user click outside
-    const checkIfClickedOutside = (e) => {
-      if (isResultsOpen && ref.current && !ref.current.contains(e.target)) {
+    const checkIfClickedOutside = (e: MouseEvent): void => {
+      if (
+        isResultsOpen &&
+        ref.current &&
+        !ref.current.contains(e.target as Node)
+      ) {
         setIsResultsOpen((prevIsResultsOpen) => !prevIsResultsOpen);
       }
     };
@@ -72,19 +79,19 @@ export default function Geocoder() {
 
   let geoResult;
 
-  if (typeof geocoderResponse === "object") {
-    geoResult = geocoderResponse.slice(0, 3).map((item) => {
+  if (geocoderResponse) {
+    geoResult = geocoderResponse.slice(0, 3).map((item: any) => {
       return (
         <li className="geocoder-result" key={item.properties.lon}>
-          <a
-            onClick={() =>
+          <button
+            onClick={() => {
               dispatch(
                 addLatLng({
                   lat: item.properties.lat,
                   lng: item.properties.lon,
                   zoom: 12,
                 })
-              ) &
+              );
               dispatch(
                 changeCurrentCoords({
                   currentCoords: {
@@ -93,17 +100,16 @@ export default function Geocoder() {
                     zoom: 12,
                   },
                 })
-              ) &
-              window.scrollTo(0, 0) &
-              setIsResultsOpen(false)
-            }
+              );
+              window.scrollTo(0, 0);
+              setIsResultsOpen(false);
+            }}
             tabIndex={0}
-            rel="noreferrer"
           >
             <div className="geocoder-result--title">
               {item.properties.formatted}
             </div>
-          </a>
+          </button>
         </li>
       );
     });
@@ -121,7 +127,6 @@ export default function Geocoder() {
       <input
         type="text"
         name="location"
-        onSubmit={handleSubmit}
         onClick={handleShow}
         onChange={handleChangeGeocoder}
         value={geocoderValue}
@@ -132,7 +137,7 @@ export default function Geocoder() {
       />
       {isGeocoderLoading ? (
         <div className="geocoder-loading"></div>
-      ) : !geocoderValue == [] ? (
+      ) : geocoderValue.length > 0 ? (
         <button
           className="content-geocoder--clear"
           onClick={handleClear}
