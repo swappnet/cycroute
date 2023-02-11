@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface IGeocoderReducer {
   lat: number;
   lng: number;
-  zoom: number;
+  zoom?: number;
 }
 
 const initialState: IGeocoderReducer = {
