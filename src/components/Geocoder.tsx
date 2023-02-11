@@ -4,7 +4,7 @@ import { addLatLng } from "../reducers/geocoderRed";
 import { changeCurrentCoords } from "../reducers/controlsReducer";
 
 export default function Geocoder() {
-  const ref = useRef();
+  const ref = useRef(null);
   const [geocoderValue, setGeocoderValue] = useState("");
   const [geocoderResponse, setGeocoderResponse] = useState([]);
   const [isGeocoderLoading, setIsGeocoderLoading] = useState(false);
@@ -133,15 +133,14 @@ export default function Geocoder() {
       {isGeocoderLoading ? (
         <div className="geocoder-loading"></div>
       ) : !geocoderValue == [] ? (
-        <a
+        <button
           className="content-geocoder--clear"
           onClick={handleClear}
-          role="button"
           title="Clear text"
           tabIndex={0}
         >
           clear
-        </a>
+        </button>
       ) : (
         <i className="gg-search content-geocoder--search--icon"></i>
       )}

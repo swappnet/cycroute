@@ -243,3 +243,20 @@
     left: 19.5rem;
   }
 }
+
+.content-geocoder--clear {
+  @include themify($themes) {
+    @include flexCenter(column, 0px);
+    position: absolute;
+    right: 0.5rem;
+    font-weight: 400;
+    font-size: 0.8rem;
+    width: 43px;
+    height: 23px;
+    border-radius: 7px;
+    color: themed(input-2);
+    background: themed(input-1);
+    cursor: pointer;
+    border: none;
+  }
+}

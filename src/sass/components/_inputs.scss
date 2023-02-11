@@ -34,19 +34,7 @@
         font-weight: 400;
       }
     }
-    .content-geocoder--clear {
-      @include flexCenter(column, 0px);
-      position: absolute;
-      right: 0.5rem;
-      font-weight: 400;
-      font-size: 0.8rem;
-      width: 43px;
-      height: 23px;
-      border-radius: 7px;
-      color: themed(input-2);
-      background: themed(input-1);
-      cursor: pointer;
-    }
+
     .content-geocoder--search--icon {
       position: absolute;
       right: 0.8rem;
