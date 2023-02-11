@@ -1,12 +1,12 @@
 import HandIcon from "../assets/hand-icon.svg";
 import RoadIcon from "../assets/road-icon.svg";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { changeDraw } from "../reducers/controlsReducer";
 
 export default function DrawType() {
-  const drawType = useSelector((state) => state.controlsReducer.draw);
-  const dispatch = useDispatch();
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const dispatch = useAppDispatch();
 
   return (
     <>

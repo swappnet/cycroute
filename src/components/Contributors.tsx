@@ -1,27 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Contributors = () => {
-  const [isContrShown, setIsContrShown] = useState(false);
+  const [isContrShown, setIsContrShown] = useState<boolean>(false);
 
-  const handleContrShown = (e) => {
+  const handleContrShown = (e: boolean) => {
     setIsContrShown(e);
-  };
 
-  useEffect(() => {
-    // Show contributors text 1.5 sec
-    const timer = setTimeout(() => {
-      setTimeout > 0 ? handleContrShown(true) : handleContrShown(false);
+    const timer: number = window.setTimeout(() => {
+      setIsContrShown(false);
     }, 1500);
     return () => clearTimeout(timer);
-  }, [isContrShown]);
+  };
+
   return (
     <>
       <button
         className="contributors-button"
-        onClick={handleContrShown}
+        onClick={() => handleContrShown(true)}
         title="Contributors"
         aria-label="Contributors"
-        rel="noreferrer"
       >
         ?
       </button>

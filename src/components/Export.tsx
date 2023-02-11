@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/redux-hooks";
 import { useEffect, useState } from "react";
 import downloadjs from "downloadjs";
 
@@ -8,9 +8,11 @@ const current_date = `${date.getFullYear()}-${
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`;
 
 export default function Export() {
-  const exportCoords = useSelector((state) => state.drawReducer.exportCoords);
+  const exportCoords = useAppSelector(
+    (state) => state.drawReducer.exportCoords
+  );
 
-  const [paths, setPaths] = useState(null);
+  const [paths, setPaths] = useState<string[] | null>(null);
   const [filename, setFilename] = useState("");
 
   const XMLHeader = `<?xml version="1.0" encoding="UTF-8"?>
@@ -43,13 +45,13 @@ export default function Export() {
 </gpx>`;
 
   function createPaths() {
-    if (exportCoords !== 0) {
+    if (exportCoords.length !== 0) {
       setPaths(
         exportCoords.map((coords) => {
           return `<trkpt lat="${coords.lat}" lon="${coords.lng}"></trkpt>`;
         })
       );
-    } else if (exportCoords == 0) {
+    } else if (exportCoords.length == 0) {
       return null;
     }
   }
@@ -60,7 +62,7 @@ export default function Export() {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const handleFilename = (e) => {
+  const handleFilename = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilename(e.target.value);
   };
 
@@ -69,17 +71,19 @@ export default function Export() {
   };
 
   const handleDownload = () => {
-    downloadjs(
-      new Blob([
-        XMLHeader + metadata + gpxStart + paths.map((path) => path) + gpxEnd,
-      ]),
-      `${
-        filename.length === 0 || !filename
-          ? `new_route_${current_date}`
-          : filename
-      }.gpx`,
-      "application/gpx+xml"
-    );
+    if (paths) {
+      downloadjs(
+        new Blob([
+          XMLHeader + metadata + gpxStart + paths.map((path) => path) + gpxEnd,
+        ]),
+        `${
+          filename.length === 0 || !filename
+            ? `new_route_${current_date}`
+            : filename
+        }.gpx`,
+        "application/gpx+xml"
+      );
+    }
 
     setIsFormOpen(false);
     setFilename("");
@@ -91,14 +95,14 @@ export default function Export() {
       <div className="content-export--wrapper">
         <button
           className={
-            exportCoords == 0 || isFormOpen
+            exportCoords.length == 0 || isFormOpen
               ? "content-export--button disabled-export"
               : "content-export--button"
           }
           title="Export GPX"
           aria-label="Export GPX"
           onClick={handleExport}
-          disabled={exportCoords == 0 || isFormOpen}
+          disabled={exportCoords.length == 0 || isFormOpen}
         >
           Export as GPX
         </button>

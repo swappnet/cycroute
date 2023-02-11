@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface IControlsReducer {
+  draw: string;
+  layer: string;
+  darkMode: string;
+  currentCoords: { lat: number; lng: number };
+}
+
+const initialState: IControlsReducer = {
   draw: "None",
   layer: "default",
   darkMode: "light",
