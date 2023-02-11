@@ -80,39 +80,45 @@ export default function Geocoder() {
   let geoResult;
 
   if (geocoderResponse) {
-    geoResult = geocoderResponse.slice(0, 3).map((item: any) => {
-      return (
-        <li className="geocoder-result" key={item.properties.lon}>
-          <button
-            onClick={() => {
-              dispatch(
-                addLatLng({
-                  lat: item.properties.lat,
-                  lng: item.properties.lon,
-                  zoom: 12,
-                })
-              );
-              dispatch(
-                changeCurrentCoords({
-                  currentCoords: {
-                    lat: item.properties.lat,
-                    lng: item.properties.lon,
-                    zoom: 12,
-                  },
-                })
-              );
-              window.scrollTo(0, 0);
-              setIsResultsOpen(false);
-            }}
-            tabIndex={0}
-          >
-            <div className="geocoder-result--title">
-              {item.properties.formatted}
-            </div>
-          </button>
-        </li>
+    geoResult = geocoderResponse
+      .slice(0, 3)
+      .map(
+        (item: {
+          properties: { lat: number; lon: number; formatted: string };
+        }) => {
+          return (
+            <li className="geocoder-result" key={item.properties.lon}>
+              <button
+                onClick={() => {
+                  dispatch(
+                    addLatLng({
+                      lat: item.properties.lat,
+                      lng: item.properties.lon,
+                      zoom: 12,
+                    })
+                  );
+                  dispatch(
+                    changeCurrentCoords({
+                      currentCoords: {
+                        lat: item.properties.lat,
+                        lng: item.properties.lon,
+                        zoom: 12,
+                      },
+                    })
+                  );
+                  window.scrollTo(0, 0);
+                  setIsResultsOpen(false);
+                }}
+                tabIndex={0}
+              >
+                <div className="geocoder-result--title">
+                  {item.properties.formatted}
+                </div>
+              </button>
+            </li>
+          );
+        }
       );
-    });
   } else if (typeof geocoderResponse === "string") {
     geoResult = <li className="geocoder-result--notfound">Nothing found</li>;
   }

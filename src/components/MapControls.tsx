@@ -3,8 +3,8 @@ import {
   redoDrawCoords,
   undoDrawCoords,
 } from "../reducers/drawReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { addLatLng } from "../reducers/geocoderRed";
+import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
+import { addLatLng, IGeocoderReducer } from "../reducers/geocoderRed";
 import { updateDrawInfo } from "../reducers/drawReducer";
 
 import deleteD from "../assets/deleteD.svg";
@@ -18,17 +18,17 @@ const options = {
 };
 
 export default function MapControls() {
-  const dispatch = useDispatch();
-  const drawCoords = useSelector((state) => state.drawReducer.drawCoords);
-  const geocoderCoords = useSelector((state) => state.geocoderReducer);
-  const drawType = useSelector((state) => state.controlsReducer.draw);
-  const currentCoords = useSelector(
+  const dispatch = useAppDispatch();
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+  const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const currentCoords = useAppSelector(
     (state) => state.controlsReducer.currentCoords
   );
-  const drawCoordsDeleted = useSelector(
+  const drawCoordsDeleted = useAppSelector(
     (state) => state.drawReducer.drawCoordsDeleted
   );
-  const drawCoordsFuture = useSelector(
+  const drawCoordsFuture = useAppSelector(
     (state) => state.drawReducer.drawCoordsFuture
   );
 
@@ -38,10 +38,13 @@ export default function MapControls() {
     }
   }, [currentCoords]);
 
-  const [isLocationFetching, setIsLocationFetching] = useState(false);
-  const [isLocationFound, setIsLocationFound] = useState(false);
+  const [isLocationFetching, setIsLocationFetching] = useState<boolean>(false);
+  const [isLocationFound, setIsLocationFound] = useState<boolean>(false);
 
-  const getPos = (data) => {
+  const getPos = (data: {
+    coords: { latitude: number; longitude: number };
+  }) => {
+    console.log(typeof data);
     setIsLocationFound(true);
     setIsLocationFetching(false);
     dispatch(
@@ -53,7 +56,7 @@ export default function MapControls() {
     );
   };
 
-  function error(err) {
+  function error(err: { code: number; message: string }) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     setIsLocationFetching(false);
   }
@@ -72,7 +75,6 @@ export default function MapControls() {
         className="map-controls--button"
         title="Undo action"
         aria-label="Undo action"
-        rel="noreferrer"
         disabled={drawCoords.length === 0 || drawType === "None"}
         onClick={() => dispatch(undoDrawCoords())}
       >
@@ -88,7 +90,6 @@ export default function MapControls() {
         className="map-controls--button"
         title="Redo action"
         aria-label="Redo action"
-        rel="noreferrer"
         disabled={
           drawType === "None" ||
           (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0)
@@ -108,20 +109,20 @@ export default function MapControls() {
         className="map-controls--button"
         title="Delete route"
         aria-label="Delete route"
-        rel="noreferrer"
         disabled={drawCoords.length === 0}
-        onClick={() =>
-          dispatch(deleteDrawCoords()) &
+        onClick={() => {
+          dispatch(deleteDrawCoords());
           dispatch(
             updateDrawInfo({
               time: "0000",
               dist: "0000",
             })
-          )
-        }
+          );
+        }}
       >
         <img
           src={deleteD}
+          alt=""
           className={
             drawCoords.length !== 0
               ? "map-controls--icon--delete active"
@@ -133,7 +134,6 @@ export default function MapControls() {
         className="map-controls--button"
         title="Find location"
         aria-label="Find location"
-        rel="noreferrer"
         onClick={() => setIsLocationFetching(true)}
       >
         {isLocationFetching ? (
