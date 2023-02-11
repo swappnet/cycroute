@@ -13,7 +13,7 @@ export default function Export() {
   );
 
   const [paths, setPaths] = useState<string[] | null>(null);
-  const [filename, setFilename] = useState("");
+  const [filename, setFilename] = useState<string>("");
 
   const XMLHeader = `<?xml version="1.0" encoding="UTF-8"?>
  <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://gpx.studio">`;
@@ -51,7 +51,7 @@ export default function Export() {
           return `<trkpt lat="${coords.lat}" lon="${coords.lng}"></trkpt>`;
         })
       );
-    } else if (exportCoords.length == 0) {
+    } else if (exportCoords.length === 0) {
       return null;
     }
   }
@@ -60,7 +60,7 @@ export default function Export() {
     createPaths();
   }, [exportCoords]);
 
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
 
   const handleFilename = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilename(e.target.value);
@@ -95,14 +95,14 @@ export default function Export() {
       <div className="content-export--wrapper">
         <button
           className={
-            exportCoords.length == 0 || isFormOpen
+            exportCoords.length === 0 || isFormOpen
               ? "content-export--button disabled-export"
               : "content-export--button"
           }
           title="Export GPX"
           aria-label="Export GPX"
           onClick={handleExport}
-          disabled={exportCoords.length == 0 || isFormOpen}
+          disabled={exportCoords.length === 0 || isFormOpen}
         >
           Export as GPX
         </button>

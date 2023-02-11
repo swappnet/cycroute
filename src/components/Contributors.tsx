@@ -3,8 +3,8 @@ import { useState } from "react";
 const Contributors = () => {
   const [isContrShown, setIsContrShown] = useState<boolean>(false);
 
-  const handleContrShown = (e: boolean) => {
-    setIsContrShown(e);
+  const handleContributionShown = () => {
+    setIsContrShown(true);
 
     const timer: number = window.setTimeout(() => {
       setIsContrShown(false);
@@ -16,7 +16,7 @@ const Contributors = () => {
     <>
       <button
         className="contributors-button"
-        onClick={() => handleContrShown(true)}
+        onClick={() => handleContributionShown()}
         title="Contributors"
         aria-label="Contributors"
       >
