@@ -120,12 +120,11 @@ export default function Map() {
           profile: 'mapbox/cycling',
         }),
         fitSelectedRoutes: false,
-        waypointMode: 'snap',
         show: false,
         routeWhileDragging: false,
         lineOptions: {
           styles: [{ color: '#00ACC1', opacity: 1, weight: 4 }],
-          extendToWaypoints: false,
+          extendToWaypoints: true,
           missingRouteTolerance: 0,
           addWaypoints: false,
         },
