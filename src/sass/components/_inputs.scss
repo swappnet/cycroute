@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 
 .download-form--input {
   @include themify($themes) {
@@ -69,11 +69,6 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            .geocoder-result--title {
-              width: 100%;
-              padding: 1rem;
-              @include flexCenter(column, 0);
-            }
           }
         }
       }
