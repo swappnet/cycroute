@@ -6,7 +6,7 @@ interface IDrawCoords {
 }
 
 interface IDrawReducer {
-  drawInfo: { time: string; dist: string };
+  drawInfo: { time?: string; dist?: string | number };
   drawCoords: IDrawCoords[];
   exportCoords: IDrawCoords[];
   drawCoordsDeleted: IDrawCoords[];
@@ -41,7 +41,7 @@ export const drawReducer = createSlice({
         },
       };
     },
-    updateDrawCoords: (state, action) => {
+    updateDrawCoords: (state, action: PayloadAction<IDrawCoords>) => {
       return {
         ...state,
         drawCoords: [
@@ -55,7 +55,7 @@ export const drawReducer = createSlice({
         drawCoordsFuture: [],
       };
     },
-    undoDrawCoords: (state) => {
+    undoDrawCoords: (state, index) => {
       if (state.drawCoords.length === 0) return;
       if (state.drawCoords.length !== 0) {
         return {
@@ -65,12 +65,12 @@ export const drawReducer = createSlice({
             ...state.drawCoords.slice(-1),
           ],
           drawCoords: state.drawCoords.filter(
-            (index) => index !== state.drawCoords.length - 1
+            (item, index) => index !== state.drawCoords.length - 1
           ),
         };
       }
     },
-    redoDrawCoords: (state) => {
+    redoDrawCoords: (state, index) => {
       if (state.drawCoordsDeleted.length === 0) {
         return {
           ...state,
@@ -80,7 +80,7 @@ export const drawReducer = createSlice({
           ],
           drawCoordsFuture: [
             ...state.drawCoordsFuture.filter(
-              (index) => index !== state.drawCoordsFuture.length - 1
+              (item, index) => index !== state.drawCoordsFuture.length - 1
             ),
           ],
         };
@@ -95,7 +95,7 @@ export const drawReducer = createSlice({
         };
       }
     },
-    deleteDrawCoords: (state) => {
+    deleteDrawCoords: (state, index) => {
       if (state.drawCoords.length === 0) return;
       if (state.drawCoords.length !== 0) {
         return {

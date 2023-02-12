@@ -76,7 +76,7 @@ export default function MapControls() {
         title="Undo action"
         aria-label="Undo action"
         disabled={drawCoords.length === 0 || drawType === "None"}
-        onClick={() => dispatch(undoDrawCoords())}
+        onClick={() => dispatch(undoDrawCoords(null))}
       >
         <i
           className={
@@ -94,7 +94,7 @@ export default function MapControls() {
           drawType === "None" ||
           (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0)
         }
-        onClick={() => dispatch(redoDrawCoords())}
+        onClick={() => dispatch(redoDrawCoords(null))}
       >
         <i
           className={
@@ -111,7 +111,7 @@ export default function MapControls() {
         aria-label="Delete route"
         disabled={drawCoords.length === 0}
         onClick={() => {
-          dispatch(deleteDrawCoords());
+          dispatch(deleteDrawCoords(null));
           dispatch(
             updateDrawInfo({
               time: "0000",

@@ -1,6 +1,9 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import GeoUtil from "leaflet-geometryutil";
 
+import * as L from "leaflet";
+import "leaflet-routing-machine";
+
 import Contributors from "../components/Contributors";
 
 import {
@@ -10,9 +13,8 @@ import {
   ZoomControl,
 } from "react-leaflet";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-import "leaflet-routing-machine";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import {
   updateDrawCoords,
   updateDrawInfo,
@@ -25,16 +27,16 @@ import midMarker from "../assets/mid-marker.svg";
 import finishMarker from "../assets/finish-marker.svg";
 
 export default function Map() {
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState<L.Map | null>(null);
 
-  const geocoderCoords = useSelector((state) => state.geocoderReducer);
-  const drawType = useSelector((state) => state.controlsReducer.draw);
-  const layer = useSelector((state) => state.controlsReducer);
-  const drawInfo = useSelector((state) => state.drawReducer.drawInfo);
-  const drawCoords = useSelector((state) => state.drawReducer.drawCoords);
-  const darkMode = useSelector((state) => state.controlsReducer.darkMode);
+  const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const layer = useAppSelector((state) => state.controlsReducer);
+  const drawInfo = useAppSelector((state) => state.drawReducer.drawInfo);
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+  const darkMode = useAppSelector((state) => state.controlsReducer.darkMode);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!map) return;
@@ -69,7 +71,10 @@ export default function Map() {
     return <TileLayer url={mapUrl} />;
   }
 
-  const [clickedCoords, setClickedCoords] = useState(null);
+  const [clickedCoords, setClickedCoords] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!map) return;
@@ -77,7 +82,7 @@ export default function Map() {
     if (map) {
       if (drawType === "None") return;
       if (drawType === "Hand" || "Road") {
-        map.on("click", (e) => {
+        map.on("click", (e: { latlng: { lat: number; lng: number } }) => {
           setClickedCoords({ lat: e.latlng.lat, lng: e.latlng.lng });
         });
       }
@@ -87,24 +92,28 @@ export default function Map() {
   useEffect(() => {
     if (!clickedCoords) return;
 
-    if (clickedCoords && drawType === "Road") {
-      dispatch(updateDrawCoords(clickedCoords));
-    } else if (clickedCoords && drawType === "Hand") {
+    if ((clickedCoords && drawType === "Road") || drawType === "Hand") {
       dispatch(updateDrawCoords(clickedCoords));
     } else {
       setClickedCoords(null);
     }
-  }, [clickedCoords]);
+  }, [clickedCoords, drawType, dispatch]);
 
-  const [routingMachine, setRoutingMachine] = useState(null);
-  const RoutingMachineRef = useRef(null);
+  const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
+  const RoutingMachineRef = useRef<L.Control | null>(null);
   let key = import.meta.env.VITE_MAPBOX_API;
 
   useEffect(() => {
     if (!map) return;
     if (map) {
+      const plan = new L.Routing.Plan(drawCoords as any, {
+        createMarker: function () {
+          return false;
+        },
+      });
+
       RoutingMachineRef.current = L.Routing.control({
-        waypoints: drawCoords,
+        waypoints: drawCoords as any,
         router: L.Routing.mapbox(key, {
           profile: "mapbox/cycling",
         }),
@@ -113,46 +122,21 @@ export default function Map() {
         show: false,
         routeWhileDragging: false,
         lineOptions: {
-          styles: [{ color: "#00ACC1", opacity: 1, weight: 3 }],
+          styles: [{ color: "#00ACC1", opacity: 1, weight: 4 }],
+          extendToWaypoints: false,
+          missingRouteTolerance: 0,
+          addWaypoints: false,
         },
-        createMarker: function (i, wp, nWps) {
-          if (i === 0) {
-            return L.marker(wp.latLng, {
-              alt: "",
-              icon: L.icon({
-                iconUrl: startMarker,
-                iconSize: [33, 33],
-                iconAnchor: [6, 25],
-              }),
-              draggable: false,
-            });
-          }
-          if (i > 0 && i < nWps - 1) {
-            return L.marker(wp.latLng, {
-              alt: "",
-              icon: L.icon({
-                iconUrl: midMarker,
-                iconSize: [28, 28],
-              }),
-              draggable: false,
-            });
-          }
-          if (i === nWps - 1) {
-            return L.marker(wp.latLng, {
-              alt: "",
-              icon: L.icon({
-                iconUrl: finishMarker,
-                iconSize: [33, 33],
-                iconAnchor: [10, 30],
-              }),
-              draggable: false,
-            });
-          }
-        },
+
+        plan,
       });
 
       setRoutingMachine(RoutingMachineRef.current);
-      return () => map.removeControl(RoutingMachineRef.current);
+      return () => {
+        if (RoutingMachineRef.current) {
+          map.removeControl(RoutingMachineRef.current);
+        }
+      };
     }
   }, [map, drawCoords]);
 
@@ -169,19 +153,17 @@ export default function Map() {
     }
   }, [routingMachine, drawType, map]);
 
-  const [drawPolyline, setDrawPolyline] = useState(null);
-  const [drawPolylineMarkers, setDrawPolylineMarkers] = useState(null);
+  const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null);
+  const [drawPolylineMarkers, setDrawPolylineMarkers] =
+    useState<L.LayerGroup | null>(null);
 
   useEffect(() => {
-    if (!drawPolyline) return;
-
-    if (drawPolyline && drawType === "Hand") {
-      let startMarkerI, midMarkerI, finishMarkerI;
+    if (map) {
       const markersLayer = L.layerGroup();
-      drawCoords.forEach((element, i) => {
+      drawCoords.forEach((coords: any, i) => {
         let lastIndex = drawCoords.length - 1;
         if (i === 0) {
-          startMarkerI = L.marker(element, {
+          return L.marker(coords, {
             alt: "",
             icon: L.icon({
               iconUrl: startMarker,
@@ -192,7 +174,7 @@ export default function Map() {
           }).addTo(markersLayer);
         }
         if (i > 0 && i < lastIndex) {
-          midMarkerI = L.marker(element, {
+          return L.marker(coords, {
             alt: "",
             icon: L.icon({
               iconUrl: midMarker,
@@ -201,8 +183,8 @@ export default function Map() {
             draggable: false,
           }).addTo(markersLayer);
         }
-        if (i == lastIndex && drawCoords.length > 1) {
-          finishMarkerI = L.marker(element, {
+        if (i === lastIndex && drawCoords.length > 1) {
+          return L.marker(coords, {
             alt: "",
             icon: L.icon({
               iconUrl: finishMarker,
@@ -214,51 +196,58 @@ export default function Map() {
         }
       });
 
-      setDrawPolylineMarkers(markersLayer);
-      markersLayer.addTo(map);
-
-      return () => map.removeLayer(markersLayer);
+      if (markersLayer) {
+        setDrawPolylineMarkers(markersLayer);
+        markersLayer.addTo(map);
+        return () => map.removeLayer(markersLayer);
+      }
     }
-  }, [map, drawCoords, drawType, drawPolyline]);
+  }, [map, drawCoords, drawType]);
 
   useEffect(() => {
     if (!routingMachine) return;
 
-    routingMachine.on("routesfound", function (e) {
-      dispatch(
-        updateDrawInfo({
-          time: String(e.routes[0].summary.totalTime / 3600)
-            .slice(0, 5)
-            .replace(".", ","),
-          dist: parseInt(e.routes[0].summary.totalDistance / 1000),
-          high: "0000",
-          low: "0000",
-        })
-      );
-      dispatch(updateExportCoords(e.routes[0].coordinates));
-    });
+    if (routingMachine) {
+      routingMachine.on("routesfound", function (e: { routes: any }) {
+        dispatch(
+          updateDrawInfo({
+            time: String(e.routes[0].summary.totalTime / 3600)
+              .slice(0, 5)
+              .replace(".", ","),
+            dist: Math.floor(e.routes[0].summary.totalDistance / 1000),
+          })
+        );
+        dispatch(updateExportCoords(e.routes[0].coordinates));
+      });
+    }
   }, [routingMachine, drawInfo]);
 
   useEffect(() => {
     if (!map) return;
 
     if (map) {
-      const polyline = L.polyline(drawCoords, { color: "#00ACC1" });
+      const polyline = L.polyline(drawCoords as any, {
+        color: "#00ACC1",
+        weight: 4,
+      });
 
-      setDrawPolyline(polyline);
-
-      return () => polyline.remove();
+      if (polyline) {
+        setDrawPolyline(polyline);
+        return () => polyline.remove();
+      }
     }
   }, [map, drawCoords]);
 
   useEffect(() => {
     if (!drawPolyline) return;
 
-    if (drawPolyline && drawType === "Hand") {
-      drawPolyline.addTo(map);
-      dispatch(updateExportCoords(drawCoords));
-    } else if (drawPolyline && drawType === "Road") {
-      drawPolyline.remove();
+    if (map) {
+      if (drawPolyline && drawType === "Hand") {
+        drawPolyline.addTo(map);
+        dispatch(updateExportCoords(drawCoords));
+      } else if (drawPolyline && drawType === "Road") {
+        drawPolyline.remove();
+      }
     }
   }, [drawPolyline, drawType, map]);
 
@@ -273,9 +262,7 @@ export default function Map() {
             time: String(polylineDist[i] / 1000 / 11)
               .slice(0, 5)
               .replace(".", ","),
-            dist: parseInt(polylineDist[i] / 1000),
-            high: "0000",
-            low: "0000",
+            dist: Math.floor(polylineDist[i] / 1000),
           })
         );
         if (drawCoords.length === 0) {
@@ -283,8 +270,6 @@ export default function Map() {
             updateDrawInfo({
               time: "0000",
               dist: "0000",
-              high: "0000",
-              low: "0000",
             })
           );
         }
@@ -293,7 +278,7 @@ export default function Map() {
   }, [drawPolyline, drawCoords, drawType]);
 
   function GetPositionByDragging() {
-    const map = useMapEvents({
+    useMapEvents({
       drag: (e) => {
         dispatch(
           changeCurrentCoords({
