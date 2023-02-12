@@ -37,7 +37,7 @@ export default function Export() {
         : filename
     }</name>
     <type>Cycling</type>
-    <trkseg>`;
+    <trkseg>\n`;
 
   const gpxEnd = `
     </trkseg>
@@ -48,7 +48,7 @@ export default function Export() {
     if (exportCoords.length !== 0) {
       setPaths(
         exportCoords.map((coords) => {
-          return `<trkpt lat="${coords.lat}" lon="${coords.lng}"></trkpt>`;
+          return `<trkpt lat="${coords.lat}" lon="${coords.lng}"></trkpt>\n`;
         })
       );
     } else if (exportCoords.length === 0) {
@@ -73,9 +73,7 @@ export default function Export() {
   const handleDownload = () => {
     if (paths) {
       downloadjs(
-        new Blob([
-          XMLHeader + metadata + gpxStart + paths.map((path) => path) + gpxEnd,
-        ]),
+        new Blob([XMLHeader + metadata + gpxStart + paths + gpxEnd]),
         `${
           filename.length === 0 || !filename
             ? `new_route_${current_date}`

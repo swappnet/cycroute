@@ -154,12 +154,10 @@ export default function Map() {
   }, [routingMachine, drawType, map]);
 
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null);
-  const [drawPolylineMarkers, setDrawPolylineMarkers] =
-    useState<L.LayerGroup | null>(null);
 
-  useEffect(() => {
+  useEffect((): any => {
+    const markersLayer = L.layerGroup();
     if (map) {
-      const markersLayer = L.layerGroup();
       drawCoords.forEach((coords: any, i) => {
         let lastIndex = drawCoords.length - 1;
         if (i === 0) {
@@ -196,19 +194,16 @@ export default function Map() {
         }
       });
 
-      if (markersLayer) {
-        setDrawPolylineMarkers(markersLayer);
-        markersLayer.addTo(map);
-        return () => map.removeLayer(markersLayer);
-      }
+      markersLayer.addTo(map);
+      return () => map.removeLayer(markersLayer);
     }
-  }, [map, drawCoords, drawType]);
+  }, [drawCoords]);
 
   useEffect(() => {
     if (!routingMachine) return;
 
     if (routingMachine) {
-      routingMachine.on("routesfound", function (e: { routes: any }) {
+      (routingMachine as any).on("routesfound", function (e: { routes: any }) {
         dispatch(
           updateDrawInfo({
             time: String(e.routes[0].summary.totalTime / 3600)
@@ -222,7 +217,7 @@ export default function Map() {
     }
   }, [routingMachine, drawInfo]);
 
-  useEffect(() => {
+  useEffect((): any => {
     if (!map) return;
 
     if (map) {
