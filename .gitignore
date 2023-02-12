@@ -7,20 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-
 node_modules
 dist
 dist-ssr
-*.txt
-*.cpuprofile
 *.local
-*.log
-.env
-.env.local
-.env.development.local
-.env.test.local
-TODOs.md
-.eslintcache
+
+.prettierignore
+.eslintignore
+package-lock.json
 
 # Editor directories and files
 .vscode/*
@@ -33,5 +27,7 @@ TODOs.md
 *.sln
 *.sw?
 
-
-
+.env
+.env.local
+.env.development.local
+.env.test.local
