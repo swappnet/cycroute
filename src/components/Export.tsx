@@ -73,7 +73,13 @@ export default function Export() {
   const handleDownload = () => {
     if (paths) {
       downloadjs(
-        new Blob([XMLHeader + metadata + gpxStart + paths + gpxEnd]),
+        new Blob([
+          XMLHeader +
+            metadata +
+            gpxStart +
+            paths.map((path) => path).join("") +
+            gpxEnd,
+        ]),
         `${
           filename.length === 0 || !filename
             ? `new_route_${current_date}`
