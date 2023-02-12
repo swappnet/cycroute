@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 .start--wrapper {
   @include themify($themes) {
     @include flexCenter(column, 1rem);
@@ -49,7 +49,7 @@
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    @include media($from: "sm") {
+    @include media($from: 'sm') {
       z-index: 1002;
     }
   }
@@ -70,7 +70,7 @@
   left: 0;
   height: 130vw;
   z-index: 1;
-  @include media($from: "sm") {
+  @include media($from: 'sm') {
     height: 100%;
     margin-left: calc(18.75rem);
     width: calc(100% - 18.75rem);
@@ -108,7 +108,7 @@
   font-weight: 400;
   letter-spacing: -0.02em;
   flex-wrap: wrap;
-  @include media($from: "sm") {
+  @include media($from: 'sm') {
     left: 21rem;
   }
   .contributors-link {
@@ -129,7 +129,7 @@
     margin-top: calc(130vw + 3.2rem);
     width: 100%;
     overflow-y: scroll;
-    @include media($from: "sm") {
+    @include media($from: 'sm') {
       position: absolute;
       max-width: 18.75rem;
       left: 0;
@@ -143,7 +143,7 @@
       width: 100%;
       margin: 0.2rem auto 0.6rem;
       @include flexCenter(row, 0px);
-      @include media($from: "sm") {
+      @include media($from: 'sm') {
         display: none;
       }
     }
@@ -166,7 +166,8 @@
             background: themed(div-0);
             border-radius: 10px;
             padding: 0.3rem 0.7rem;
-            width: 100px;
+            width: 6.25rem;
+            height: 6.5rem;
             cursor: pointer;
             &.active {
               background: themed(div-1);
@@ -174,7 +175,7 @@
             }
             @include on-hover {
               background: themed(div-1);
-              transition: 0.1s ease-in;
+              transition: 0.2s ease-in;
             }
             .content-draw-box--icon {
               max-width: 50px;
@@ -202,26 +203,34 @@
         .content-layers--wrapper {
           @include flexCenter(row, 1rem);
           .content-layers-box {
-            padding: 0.3rem 0.7rem;
-            width: 100px;
-            height: 70px;
+            width: 6.25rem;
+            height: 4.37rem;
             @include flexCenter(row, 0px);
             border-radius: 10px;
             background: themed(div-0);
             cursor: pointer;
-            &:hover,
-            &:focus {
-              background: themed(div-1);
-              transition: 0.1s ease-in;
-            }
+            position: relative;
             .content-layers-box--icon {
-              max-width: 50px;
-              max-height: 50px;
               width: 100%;
+              height: 100%;
+              border-radius: 10px;
             }
-            &.active {
-              background: themed(div-1);
-              cursor: default;
+            .content-layers-box--icon--bg {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              border-radius: 10px;
+              &:hover,
+              &:focus {
+                background: themed(div-1);
+                transition: 0.2s ease-in;
+                opacity: 0.7;
+              }
+              &.active {
+                background: themed(div-1);
+                opacity: 0.7;
+                cursor: default;
+              }
             }
           }
         }
@@ -229,7 +238,7 @@
           @include flexCenter(row, 0.5rem);
           width: 70%;
           .content-export-download--wrapper {
-            @include media($from: "sm") {
+            @include media($from: 'sm') {
               bottom: 19rem;
               max-width: 90%;
             }

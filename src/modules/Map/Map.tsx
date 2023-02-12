@@ -19,8 +19,8 @@ import {
   updateDrawCoords,
   updateDrawInfo,
   updateExportCoords,
-} from '../../reducers/drawReducer/drawReducer';
-import { changeCurrentCoords } from '../../reducers/controlsReducer/controlsReducer';
+} from '../../reducers/drawReducer';
+import { changeCurrentCoords } from '../../reducers/controlsReducer';
 
 import startMarker from '../../assets/start-marker.svg';
 import midMarker from '../../assets/mid-marker.svg';

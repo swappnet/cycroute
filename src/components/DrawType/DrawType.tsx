@@ -2,7 +2,7 @@ import HandIcon from '../../assets/hand-icon.svg';
 import RoadIcon from '../../assets/road-icon.svg';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { changeDraw } from '../../reducers/controlsReducer/controlsReducer';
+import { changeDraw } from '../../reducers/controlsReducer';
 
 export default function DrawType() {
   const drawType = useAppSelector((state) => state.controlsReducer.draw);

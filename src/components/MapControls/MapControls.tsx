@@ -2,10 +2,10 @@ import {
   deleteDrawCoords,
   redoDrawCoords,
   undoDrawCoords,
-} from '../../reducers/drawReducer/drawReducer';
+} from '../../reducers/drawReducer';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { addLatLng } from '../../reducers/geocoderReducer/geocoderReducer';
-import { updateDrawInfo } from '../../reducers/drawReducer/drawReducer';
+import { addLatLng } from '../../reducers/geocoderReducer';
+import { updateDrawInfo } from '../../reducers/drawReducer';
 
 import deleteD from '../../assets/deleteD.svg';
 

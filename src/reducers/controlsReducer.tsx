@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IGeocoderReducer } from '../geocoderReducer/geocoderReducer';
+import { IGeocoderReducer } from './geocoderReducer';
 
 interface IControlsReducer {
   draw: string;
