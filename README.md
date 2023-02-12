@@ -13,6 +13,7 @@ CYCROUTE - website to create bike routes and export them in GPX format.
 
 ## TO-DO
 
+* ~~Migrate project to TypeScript~~;
 * Add help windows on New Route;
 * Create route color changing;
 * Add KML export;
