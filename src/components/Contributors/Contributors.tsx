@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const Contributors = () => {
   const [isContrShown, setIsContrShown] = useState<boolean>(false);

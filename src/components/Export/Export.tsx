@@ -1,6 +1,6 @@
-import { useAppSelector } from "../../hooks/redux-hooks";
-import { useEffect, useState } from "react";
-import downloadjs from "downloadjs";
+import { useAppSelector } from '../../hooks/redux-hooks';
+import { useEffect, useState } from 'react';
+import downloadjs from 'downloadjs';
 
 const date = new Date();
 const current_date = `${date.getFullYear()}-${
@@ -13,7 +13,7 @@ export default function Export() {
   );
 
   const [paths, setPaths] = useState<string[] | null>(null);
-  const [filename, setFilename] = useState<string>("");
+  const [filename, setFilename] = useState<string>('');
 
   const XMLHeader = `<?xml version="1.0" encoding="UTF-8"?>
  <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://gpx.studio">`;
@@ -77,7 +77,7 @@ export default function Export() {
           XMLHeader +
             metadata +
             gpxStart +
-            paths.map((path) => path).join("") +
+            paths.map((path) => path).join('') +
             gpxEnd,
         ]),
         `${
@@ -85,12 +85,12 @@ export default function Export() {
             ? `new_route_${current_date}`
             : filename
         }.gpx`,
-        "application/gpx+xml"
+        'application/gpx+xml'
       );
     }
 
     setIsFormOpen(false);
-    setFilename("");
+    setFilename('');
   };
 
   return (
@@ -100,8 +100,8 @@ export default function Export() {
         <button
           className={
             exportCoords.length === 0 || isFormOpen
-              ? "content-export--button disabled-export"
-              : "content-export--button"
+              ? 'content-export--button disabled-export'
+              : 'content-export--button'
           }
           title="Export GPX"
           aria-label="Export GPX"

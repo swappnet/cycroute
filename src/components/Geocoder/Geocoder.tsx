@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { addLatLng } from "../../reducers/geocoderReducer/geocoderReducer";
-import { changeCurrentCoords } from "../../reducers/controlsReducer/controlsReducer";
+import { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { addLatLng } from '../../reducers/geocoderReducer/geocoderReducer';
+import { changeCurrentCoords } from '../../reducers/controlsReducer/controlsReducer';
 
 export default function Geocoder() {
   const ref = useRef<HTMLFormElement>(null);
-  const [geocoderValue, setGeocoderValue] = useState<string>("");
+  const [geocoderValue, setGeocoderValue] = useState<string>('');
   const [geocoderResponse, setGeocoderResponse] = useState<any>(null);
   const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false);
   const [isResultsOpen, setIsResultsOpen] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export default function Geocoder() {
   };
 
   const handleClear = () => {
-    setGeocoderValue("");
+    setGeocoderValue('');
   };
 
   const handleSubmit = (e: React.FormEvent): void => {
@@ -39,11 +39,11 @@ export default function Geocoder() {
       const data = await response.json();
       data.features.length > 0
         ? setGeocoderResponse(data.features)
-        : setGeocoderResponse("Nothing found");
+        : setGeocoderResponse('Nothing found');
       setIsGeocoderLoading(false);
       setIsResultsOpen(true);
     } catch (err) {
-      console.log("We have some problems:" + err);
+      console.log('We have some problems:' + err);
     }
   };
 
@@ -71,9 +71,9 @@ export default function Geocoder() {
         setIsResultsOpen((prevIsResultsOpen) => !prevIsResultsOpen);
       }
     };
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.addEventListener('mousedown', checkIfClickedOutside);
     return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
+      document.removeEventListener('mousedown', checkIfClickedOutside);
     };
   }, [isResultsOpen]);
 
@@ -119,7 +119,7 @@ export default function Geocoder() {
           );
         }
       );
-  } else if (typeof geocoderResponse === "string") {
+  } else if (typeof geocoderResponse === 'string') {
     geoResult = <li className="geocoder-result--notfound">Nothing found</li>;
   }
 

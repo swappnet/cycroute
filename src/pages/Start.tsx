@@ -1,9 +1,9 @@
-import startlogo from "../assets/startlogo.svg";
-import githublogo from "../assets/githublogo.svg";
+import startlogo from '../assets/startlogo.svg';
+import githublogo from '../assets/githublogo.svg';
 
-import { useAppSelector, useAppDispatch } from "../hooks/redux-hooks";
-import { switchDark } from "../reducers/controlsReducer/controlsReducer";
-import { MouseEventHandler } from "react";
+import { useAppSelector, useAppDispatch } from '../hooks/redux-hooks';
+import { switchDark } from '../reducers/controlsReducer/controlsReducer';
+import { MouseEventHandler } from 'react';
 
 const date = new Date();
 const year = date.getFullYear();
@@ -38,10 +38,10 @@ function StartScreen({ newRoute }: { newRoute: MouseEventHandler }) {
               title="Change theme"
               aria-label="Change theme"
               onChange={() => {
-                if (darkMode === "dark") {
-                  dispatch(switchDark("light"));
-                } else if (darkMode === "light") {
-                  dispatch(switchDark("dark"));
+                if (darkMode === 'dark') {
+                  dispatch(switchDark('light'));
+                } else if (darkMode === 'light') {
+                  dispatch(switchDark('dark'));
                 }
               }}
             />

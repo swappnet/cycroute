@@ -1,7 +1,7 @@
-import geocoderReducer from "./geocoderReducer/geocoderReducer";
-import controlsReducer from "./controlsReducer/controlsReducer";
-import drawReducer from "./drawReducer/drawReducer";
-import { configureStore } from "@reduxjs/toolkit";
+import geocoderReducer from './geocoderReducer/geocoderReducer';
+import controlsReducer from './controlsReducer/controlsReducer';
+import drawReducer from './drawReducer/drawReducer';
+import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {

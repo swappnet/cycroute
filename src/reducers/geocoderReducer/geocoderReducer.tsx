@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IGeocoderReducer {
   lat: number;
@@ -13,7 +13,7 @@ const initialState: IGeocoderReducer = {
 };
 
 export const geocoderReducer = createSlice({
-  name: "geocoderLatLng",
+  name: 'geocoderLatLng',
   initialState,
   reducers: {
     addLatLng: (state, action: PayloadAction<IGeocoderReducer>) => {

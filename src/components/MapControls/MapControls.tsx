@@ -2,17 +2,14 @@ import {
   deleteDrawCoords,
   redoDrawCoords,
   undoDrawCoords,
-} from "../../reducers/drawReducer/drawReducer";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import {
-  addLatLng,
-  IGeocoderReducer,
-} from "../../reducers/geocoderReducer/geocoderReducer";
-import { updateDrawInfo } from "../../reducers/drawReducer/drawReducer";
+} from '../../reducers/drawReducer/drawReducer';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
+import { addLatLng } from '../../reducers/geocoderReducer/geocoderReducer';
+import { updateDrawInfo } from '../../reducers/drawReducer/drawReducer';
 
-import deleteD from "../assets/deleteD.svg";
+import deleteD from '../../assets/deleteD.svg';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const options = {
   enableHighAccuracy: true,
@@ -78,12 +75,12 @@ export default function MapControls() {
         className="map-controls--button"
         title="Undo action"
         aria-label="Undo action"
-        disabled={drawCoords.length === 0 || drawType === "None"}
+        disabled={drawCoords.length === 0 || drawType === 'None'}
         onClick={() => dispatch(undoDrawCoords(null))}
       >
         <i
           className={
-            drawCoords.length === 0 || drawType === "None"
+            drawCoords.length === 0 || drawType === 'None'
               ? `gg-undo map-controls--icon disabled`
               : `gg-undo map-controls--icon`
           }
@@ -94,14 +91,14 @@ export default function MapControls() {
         title="Redo action"
         aria-label="Redo action"
         disabled={
-          drawType === "None" ||
+          drawType === 'None' ||
           (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0)
         }
         onClick={() => dispatch(redoDrawCoords(null))}
       >
         <i
           className={
-            drawType === "None" ||
+            drawType === 'None' ||
             (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0)
               ? `gg-redo map-controls--icon disabled`
               : `gg-redo map-controls--icon`
@@ -117,8 +114,8 @@ export default function MapControls() {
           dispatch(deleteDrawCoords(null));
           dispatch(
             updateDrawInfo({
-              time: "0000",
-              dist: "0000",
+              time: '0000',
+              dist: '0000',
             })
           );
         }}
@@ -128,8 +125,8 @@ export default function MapControls() {
           alt=""
           className={
             drawCoords.length !== 0
-              ? "map-controls--icon--delete active"
-              : "map-controls--icon--delete disabled"
+              ? 'map-controls--icon--delete active'
+              : 'map-controls--icon--delete disabled'
           }
         />
       </button>

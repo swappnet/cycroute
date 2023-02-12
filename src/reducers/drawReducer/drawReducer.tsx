@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IDrawCoords {
   lat?: number;
@@ -14,7 +14,7 @@ interface IDrawReducer {
 }
 
 const initialState: IDrawReducer = {
-  drawInfo: { time: "0000", dist: "0000" },
+  drawInfo: { time: '0000', dist: '0000' },
   drawCoords: [],
   exportCoords: [],
   drawCoordsDeleted: [],
@@ -22,7 +22,7 @@ const initialState: IDrawReducer = {
 };
 
 export const drawReducer = createSlice({
-  name: "draw",
+  name: 'draw',
   initialState,
   reducers: {
     updateExportCoords: (state, action) => {
@@ -31,7 +31,10 @@ export const drawReducer = createSlice({
         exportCoords: action.payload,
       };
     },
-    updateDrawInfo: (state, action) => {
+    updateDrawInfo: (
+      state,
+      action: PayloadAction<{ time: string; dist: number | string }>
+    ) => {
       return {
         ...state,
         drawInfo: {

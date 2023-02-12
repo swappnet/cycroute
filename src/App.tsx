@@ -1,7 +1,7 @@
-import Home from "./pages/Home";
-import { useState } from "react";
-import Start from "./pages/Start";
-import { useAppSelector } from "./hooks/redux-hooks";
+import Home from './pages/Home';
+import { useState } from 'react';
+import Start from './pages/Start';
+import { useAppSelector } from './hooks/redux-hooks';
 
 function App() {
   const [isNewRoute, setIsNewRoute] = useState<boolean>(false);

@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IGeocoderReducer } from '../geocoderReducer/geocoderReducer';
 
 interface IControlsReducer {
   draw: string;
@@ -8,9 +9,9 @@ interface IControlsReducer {
 }
 
 const initialState: IControlsReducer = {
-  draw: "None",
-  layer: "default",
-  darkMode: "light",
+  draw: 'None',
+  layer: 'default',
+  darkMode: 'light',
   currentCoords: {
     lat: 50.45,
     lng: 30.5241,
@@ -18,34 +19,33 @@ const initialState: IControlsReducer = {
 };
 
 export const controlsReducer = createSlice({
-  name: "controls",
+  name: 'controls',
   initialState,
   reducers: {
-    updateLocation: (state, action) => {
-      return {
-        ...state,
-        location: action.payload,
-      };
-    },
-    changeDraw: (state, action) => {
+    changeDraw: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         draw: action.payload,
       };
     },
-    changeLayer: (state, action) => {
+    changeLayer: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         layer: action.payload,
       };
     },
-    switchDark: (state, action) => {
+    switchDark: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         darkMode: action.payload,
       };
     },
-    changeCurrentCoords: (state, action) => {
+    changeCurrentCoords: (
+      state,
+      action: PayloadAction<{
+        currentCoords: { lat: number; lng: number; zoom?: number };
+      }>
+    ) => {
       return {
         ...state,
         currentCoords: {
@@ -57,11 +57,6 @@ export const controlsReducer = createSlice({
   },
 });
 
-export const {
-  changeDraw,
-  changeLayer,
-  changeCurrentCoords,
-  updateLocation,
-  switchDark,
-} = controlsReducer.actions;
+export const { changeDraw, changeLayer, changeCurrentCoords, switchDark } =
+  controlsReducer.actions;
 export default controlsReducer.reducer;

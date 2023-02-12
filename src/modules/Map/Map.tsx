@@ -1,30 +1,30 @@
-import { useState, useMemo, useEffect, useRef } from "react";
-import GeoUtil from "leaflet-geometryutil";
+import { useState, useMemo, useEffect, useRef } from 'react';
+import GeoUtil from 'leaflet-geometryutil';
 
-import * as L from "leaflet";
-import "leaflet-routing-machine";
+import * as L from 'leaflet';
+import 'leaflet-routing-machine';
 
-import Contributors from "../../components/Contributors/Contributors";
+import Contributors from '../../components/Contributors/Contributors';
 
 import {
   MapContainer,
   TileLayer,
   useMapEvents,
   ZoomControl,
-} from "react-leaflet";
-import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
+} from 'react-leaflet';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import {
   updateDrawCoords,
   updateDrawInfo,
   updateExportCoords,
-} from "../../reducers/drawReducer/drawReducer";
-import { changeCurrentCoords } from "../../reducers/controlsReducer/controlsReducer";
+} from '../../reducers/drawReducer/drawReducer';
+import { changeCurrentCoords } from '../../reducers/controlsReducer/controlsReducer';
 
-import startMarker from "../assets/start-marker.svg";
-import midMarker from "../assets/mid-marker.svg";
-import finishMarker from "../assets/finish-marker.svg";
+import startMarker from '../../assets/start-marker.svg';
+import midMarker from '../../assets/mid-marker.svg';
+import finishMarker from '../../assets/finish-marker.svg';
 
 export default function Map() {
   const [map, setMap] = useState<L.Map | null>(null);
@@ -50,20 +50,20 @@ export default function Map() {
   }, [map, geocoderCoords]);
 
   function StyleMap() {
-    const [mapUrl, setMapUrl] = useState("");
+    const [mapUrl, setMapUrl] = useState<string>('');
 
     useMemo(() => {
-      if (layer.layer === "default") {
-        darkMode === "dark"
+      if (layer.layer === 'default') {
+        darkMode === 'dark'
           ? setMapUrl(
-              "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+              'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
             )
           : setMapUrl(
-              "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+              'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'
             );
-      } else if (layer.layer === "satellite") {
+      } else if (layer.layer === 'satellite') {
         setMapUrl(
-          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+          'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
         );
       }
     }, [layer.layer]);
@@ -80,9 +80,9 @@ export default function Map() {
     if (!map) return;
 
     if (map) {
-      if (drawType === "None") return;
-      if (drawType === "Hand" || "Road") {
-        map.on("click", (e: { latlng: { lat: number; lng: number } }) => {
+      if (drawType === 'None') return;
+      if (drawType === 'Hand' || 'Road') {
+        map.on('click', (e: { latlng: { lat: number; lng: number } }) => {
           setClickedCoords({ lat: e.latlng.lat, lng: e.latlng.lng });
         });
       }
@@ -92,9 +92,9 @@ export default function Map() {
   useEffect(() => {
     if (!clickedCoords) return;
 
-    if (clickedCoords && drawType === "Road") {
+    if (clickedCoords && drawType === 'Road') {
       dispatch(updateDrawCoords(clickedCoords));
-    } else if (clickedCoords && drawType === "Hand") {
+    } else if (clickedCoords && drawType === 'Hand') {
       dispatch(updateDrawCoords(clickedCoords));
     } else {
       setClickedCoords(null);
@@ -117,14 +117,14 @@ export default function Map() {
       RoutingMachineRef.current = L.Routing.control({
         waypoints: drawCoords as any,
         router: L.Routing.mapbox(key, {
-          profile: "mapbox/cycling",
+          profile: 'mapbox/cycling',
         }),
         fitSelectedRoutes: false,
-        waypointMode: "snap",
+        waypointMode: 'snap',
         show: false,
         routeWhileDragging: false,
         lineOptions: {
-          styles: [{ color: "#00ACC1", opacity: 1, weight: 4 }],
+          styles: [{ color: '#00ACC1', opacity: 1, weight: 4 }],
           extendToWaypoints: false,
           missingRouteTolerance: 0,
           addWaypoints: false,
@@ -147,9 +147,9 @@ export default function Map() {
     if (!map) return;
 
     if (map) {
-      if (routingMachine && drawType === "Road") {
+      if (routingMachine && drawType === 'Road') {
         routingMachine.addTo(map);
-      } else if (routingMachine && drawType === "Hand") {
+      } else if (routingMachine && drawType === 'Hand') {
         map.removeControl(routingMachine);
       }
     }
@@ -164,7 +164,7 @@ export default function Map() {
         let lastIndex = drawCoords.length - 1;
         if (i === 0) {
           return L.marker(coords, {
-            alt: "",
+            alt: '',
             icon: L.icon({
               iconUrl: startMarker,
               iconSize: [33, 33],
@@ -175,7 +175,7 @@ export default function Map() {
         }
         if (i > 0 && i < lastIndex) {
           return L.marker(coords, {
-            alt: "",
+            alt: '',
             icon: L.icon({
               iconUrl: midMarker,
               iconSize: [18, 18],
@@ -185,7 +185,7 @@ export default function Map() {
         }
         if (i === lastIndex && drawCoords.length > 1) {
           return L.marker(coords, {
-            alt: "",
+            alt: '',
             icon: L.icon({
               iconUrl: finishMarker,
               iconSize: [33, 33],
@@ -205,12 +205,12 @@ export default function Map() {
     if (!routingMachine) return;
 
     if (routingMachine) {
-      (routingMachine as any).on("routesfound", function (e: { routes: any }) {
+      (routingMachine as any).on('routesfound', function (e: { routes: any }) {
         dispatch(
           updateDrawInfo({
             time: String(e.routes[0].summary.totalTime / 3600)
               .slice(0, 5)
-              .replace(".", ","),
+              .replace('.', ','),
             dist: Math.floor(e.routes[0].summary.totalDistance / 1000),
           })
         );
@@ -224,7 +224,7 @@ export default function Map() {
 
     if (map) {
       const polyline = L.polyline(drawCoords as any, {
-        color: "#00ACC1",
+        color: '#00ACC1',
         weight: 4,
       });
 
@@ -239,10 +239,10 @@ export default function Map() {
     if (!drawPolyline) return;
 
     if (map) {
-      if (drawPolyline && drawType === "Hand") {
+      if (drawPolyline && drawType === 'Hand') {
         drawPolyline.addTo(map);
         dispatch(updateExportCoords(drawCoords));
-      } else if (drawPolyline && drawType === "Road") {
+      } else if (drawPolyline && drawType === 'Road') {
         drawPolyline.remove();
       }
     }
@@ -251,22 +251,22 @@ export default function Map() {
   useEffect(() => {
     if (!drawPolyline) return;
 
-    if (drawPolyline && drawType === "Hand") {
+    if (drawPolyline && drawType === 'Hand') {
       const polylineDist = GeoUtil.accumulatedLengths(drawPolyline);
       for (let i = 0; i < polylineDist.length; i++) {
         dispatch(
           updateDrawInfo({
             time: String(polylineDist[i] / 1000 / 11)
               .slice(0, 5)
-              .replace(".", ","),
+              .replace('.', ','),
             dist: Math.floor(polylineDist[i] / 1000),
           })
         );
         if (drawCoords.length === 0) {
           dispatch(
             updateDrawInfo({
-              time: "0000",
-              dist: "0000",
+              time: '0000',
+              dist: '0000',
             })
           );
         }
@@ -276,7 +276,7 @@ export default function Map() {
 
   function GetPositionByDragging() {
     useMapEvents({
-      drag: (e) => {
+      drag: (e: L.LeafletEvent) => {
         dispatch(
           changeCurrentCoords({
             currentCoords: {
