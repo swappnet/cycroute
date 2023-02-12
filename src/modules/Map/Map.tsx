@@ -4,7 +4,7 @@ import GeoUtil from "leaflet-geometryutil";
 import * as L from "leaflet";
 import "leaflet-routing-machine";
 
-import Contributors from "../components/Contributors";
+import Contributors from "../../components/Contributors/Contributors";
 
 import {
   MapContainer,
@@ -14,13 +14,13 @@ import {
 } from "react-leaflet";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
-import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import {
   updateDrawCoords,
   updateDrawInfo,
   updateExportCoords,
-} from "../reducers/drawReducer";
-import { changeCurrentCoords } from "../reducers/controlsReducer";
+} from "../../reducers/drawReducer/drawReducer";
+import { changeCurrentCoords } from "../../reducers/controlsReducer/controlsReducer";
 
 import startMarker from "../assets/start-marker.svg";
 import midMarker from "../assets/mid-marker.svg";

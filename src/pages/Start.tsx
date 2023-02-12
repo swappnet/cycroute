@@ -2,7 +2,7 @@ import startlogo from "../assets/startlogo.svg";
 import githublogo from "../assets/githublogo.svg";
 
 import { useAppSelector, useAppDispatch } from "../hooks/redux-hooks";
-import { switchDark } from "../reducers/controlsReducer";
+import { switchDark } from "../reducers/controlsReducer/controlsReducer";
 import { MouseEventHandler } from "react";
 
 const date = new Date();

@@ -1,6 +1,6 @@
-import geocoderReducer from "./geocoderRed";
-import controlsReducer from "./controlsReducer";
-import drawReducer from "./drawReducer";
+import geocoderReducer from "./geocoderReducer/geocoderReducer";
+import controlsReducer from "./controlsReducer/controlsReducer";
+import drawReducer from "./drawReducer/drawReducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({

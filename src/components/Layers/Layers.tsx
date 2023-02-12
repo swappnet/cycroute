@@ -1,8 +1,8 @@
 import defaultIcn from "../assets/default-icon.svg";
 import satelliteIcn from "../assets/satellite-icon.svg";
-import { useAppSelector, useAppDispatch } from "../hooks/redux-hooks";
-import { changeLayer } from "../reducers/controlsReducer";
-import { addLatLng } from "../reducers/geocoderRed";
+import { useAppSelector, useAppDispatch } from "../../hooks/redux-hooks";
+import { changeLayer } from "../../reducers/controlsReducer/controlsReducer";
+import { addLatLng } from "../../reducers/geocoderReducer/geocoderReducer";
 
 export default function Layers() {
   const layer = useAppSelector((state) => state.controlsReducer);

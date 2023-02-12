@@ -1,4 +1,4 @@
-import { useAppSelector } from "../hooks/redux-hooks";
+import { useAppSelector } from "../../hooks/redux-hooks";
 
 export default function Info() {
   const drawInfo = useAppSelector((state) => state.drawReducer.drawInfo);

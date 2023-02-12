@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { addLatLng } from "../reducers/geocoderRed";
-import { changeCurrentCoords } from "../reducers/controlsReducer";
+import { addLatLng } from "../../reducers/geocoderReducer/geocoderReducer";
+import { changeCurrentCoords } from "../../reducers/controlsReducer/controlsReducer";
 
 export default function Geocoder() {
   const ref = useRef<HTMLFormElement>(null);
