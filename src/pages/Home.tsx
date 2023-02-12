@@ -1,5 +1,5 @@
-import Header from "../modules/Header";
-import Editor from "../modules/Editor";
+import Header from "../components/Header/Header";
+import Editor from "../modules/Editor/Editor";
 
 function MainScreen() {
   return (
