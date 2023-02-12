@@ -92,12 +92,14 @@ export default function Map() {
   useEffect(() => {
     if (!clickedCoords) return;
 
-    if ((clickedCoords && drawType === "Road") || drawType === "Hand") {
+    if (clickedCoords && drawType === "Road") {
+      dispatch(updateDrawCoords(clickedCoords));
+    } else if (clickedCoords && drawType === "Hand") {
       dispatch(updateDrawCoords(clickedCoords));
     } else {
       setClickedCoords(null);
     }
-  }, [clickedCoords, drawType, dispatch]);
+  }, [clickedCoords]);
 
   const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
   const RoutingMachineRef = useRef<L.Control | null>(null);
