@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 
 *,
 *:before,
@@ -28,4 +28,12 @@ body {
 html {
   height: 100%;
   width: 100%;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+*:focus-visible {
+  outline: 0.13rem solid #bedb94;
+  outline-offset: 0.125rem;
 }

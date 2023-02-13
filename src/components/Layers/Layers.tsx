@@ -49,6 +49,7 @@ export default function Layers() {
                 : 'content-layers-box--icon--bg'
             }
           />
+          <p className="content-layers-box--title">Default</p>
           <img className="content-layers-box--icon" src={defaultIcn} alt="" />
         </div>
         <div
@@ -66,6 +67,7 @@ export default function Layers() {
                 : 'content-layers-box--icon--bg'
             }
           />
+          <p className="content-layers-box--title">Satellite</p>
           <img className="content-layers-box--icon" src={satelliteIcn} alt="" />
         </div>
       </div>

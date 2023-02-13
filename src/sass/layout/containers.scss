@@ -173,6 +173,7 @@
             width: 6.25rem;
             height: 6.5rem;
             cursor: pointer;
+
             &.active {
               background: themed(div-1);
               border-radius: 10px;
@@ -214,6 +215,7 @@
             background: themed(div-0);
             cursor: pointer;
             position: relative;
+
             .content-layers-box--icon {
               width: 100%;
               height: 100%;
@@ -230,6 +232,7 @@
                 transition: 0.2s ease-in;
                 opacity: 0.7;
               }
+              z-index: 1002;
               &.active {
                 background: themed(div-1);
                 opacity: 0.7;
@@ -247,6 +250,7 @@
               max-width: 90%;
             }
             @include flexCenter(column, 0);
+            z-index: 1005;
             position: absolute;
             bottom: 7rem;
             left: 0;

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, EffectCallback } from 'react';
 import GeoUtil from 'leaflet-geometryutil';
 
 import * as L from 'leaflet';
@@ -156,7 +156,7 @@ export default function Map() {
 
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null);
 
-  useEffect((): any => {
+  useEffect((): ReturnType<L.Map | any> => {
     const markersLayer = L.layerGroup();
     if (map) {
       drawCoords.forEach((coords: any, i) => {
@@ -204,7 +204,7 @@ export default function Map() {
     if (!routingMachine) return;
 
     if (routingMachine) {
-      (routingMachine as any).on('routesfound', function (e: { routes: any }) {
+      (routingMachine as any).on('routesfound', function (e: any) {
         dispatch(
           updateDrawInfo({
             time: String(e.routes[0].summary.totalTime / 3600)
@@ -218,7 +218,7 @@ export default function Map() {
     }
   }, [routingMachine, drawInfo]);
 
-  useEffect((): any => {
+  useEffect((): ReturnType<L.Polyline | any> => {
     if (!map) return;
 
     if (map) {

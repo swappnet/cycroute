@@ -1,30 +1,28 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 
 .start-button {
-  background: linear-gradient(91.88deg, #a3d168 6.89%, #6fc068 117.86%);
-  border-radius: 15px;
-  border: none;
-  padding: 1rem;
-  max-width: 250px;
-  width: 100%;
-  cursor: pointer;
-  @include on-hover {
-    background: linear-gradient(91.88deg, #a4d168e0 6.89%, #6fc068e5 117.86%);
+  @include themify($themes) {
+    background: linear-gradient(91.88deg, #a3d168 6.89%, #6fc068 117.86%);
+    border-radius: 15px;
+    border: none;
+    padding: 1rem;
+    max-width: 250px;
+    width: 100%;
+    cursor: pointer;
+    @include on-hover {
+      background: linear-gradient(91.88deg, #a4d168e0 6.89%, #6fc068e5 117.86%);
+    }
+    -webkit-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
+    -moz-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
+    box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
   }
-  -webkit-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
-  -moz-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
-  box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
 }
 
 .start-github--link {
   @include flexCenter(row, 0.2em);
   bottom: 3rem;
   font-weight: 700;
-  user-select: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .content-export--button {
@@ -57,7 +55,8 @@
   height: 80px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2) !important;
   border-radius: 50%;
-  @include media($from: "sm") {
+
+  @include media($from: 'sm') {
     bottom: 4rem;
   }
   .leaflet-control-zoom-in,
@@ -142,7 +141,7 @@
     .slider:before {
       background-color: #fff;
       bottom: 3px;
-      content: "";
+      content: '';
       height: 1.5rem;
       left: 4px;
       position: absolute;
@@ -179,16 +178,19 @@
 
 .download-form--close {
   @include themify($themes) {
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     position: absolute;
+    background-color: themed(text-6);
     top: 0;
-    right: 0.2rem;
+    right: 0;
     padding: 0.3rem 0.7rem;
     font-family: $primary-font;
     color: themed(text-8);
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
+    border-radius: 0 10px 0px 10px;
   }
 }
 
@@ -203,6 +205,10 @@
     border: none;
     @include flexCenter(column, 0);
     @include on-hover {
+      background-color: themed(button-1);
+    }
+    &:focus-visible {
+      outline: 2px solid #bedb94;
       background-color: themed(button-1);
     }
     &:disabled {
@@ -239,7 +245,7 @@
   top: 3.7rem;
   left: 0.5rem;
   @include flexCenter(row, 0px);
-  @include media($from: "sm") {
+  @include media($from: 'sm') {
     left: 19.5rem;
   }
 }

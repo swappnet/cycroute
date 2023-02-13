@@ -113,7 +113,7 @@ export default function Export() {
         {isFormOpen && (
           <div className="content-export-download--wrapper">
             <p className="content-export-download--title">Choose name</p>
-            <form className="download-form" tabIndex={0}>
+            <form className="download-form">
               <div
                 role="button"
                 title="Close download window"
