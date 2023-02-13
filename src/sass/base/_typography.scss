@@ -222,12 +222,11 @@ a {
     padding: 0 0.1rem;
     @include flexCenter(column, 0);
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.8rem;
     line-height: 24px;
     text-align: center;
-    letter-spacing: -0.015em;
-    color: themed(layers-title);
+    color: themed(div-text0);
     background-color: themed(layers-title-bg);
     bottom: 0;
     border-radius: 0 0 10px 10px;
