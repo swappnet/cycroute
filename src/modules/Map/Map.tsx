@@ -20,9 +20,15 @@ import { updateDrawInfo, updateExportCoords } from '../../reducers/drawReducer';
 import startMarker from '../../assets/start-marker.svg';
 import midMarker from '../../assets/mid-marker.svg';
 import finishMarker from '../../assets/finish-marker.svg';
+import useUpdateMapView from '../../hooks/useUpdateMapView';
 
 export default function Map() {
   const [map, setMap] = useState<L.Map | null>(null);
+
+  //---Hooks---
+  useClickedCoords(map);
+  useUpdateMapView(map);
+  //--- END_HOOKS---
 
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
@@ -31,19 +37,6 @@ export default function Map() {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!map) return;
-
-    if (map) {
-      map.setView(
-        [geocoderCoords.lat, geocoderCoords.lng],
-        geocoderCoords.zoom
-      );
-    }
-  }, [map, geocoderCoords]);
-
-  useClickedCoords(map);
 
   const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
   const RoutingMachineRef = useRef<L.Control | null>(null);
