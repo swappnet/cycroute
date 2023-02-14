@@ -289,8 +289,8 @@
       border-radius: 10px;
       &:hover {
         background: linear-gradient(
-          0deg,
-          themed(div-1) 40%,
+          180deg,
+          themed(div-1) 10%,
           rgba(0, 212, 255, 0) 100%
         );
         opacity: 0.8;
@@ -298,8 +298,8 @@
       z-index: 1002;
       &.active {
         background: linear-gradient(
-          0deg,
-          themed(div-1) 40%,
+          180deg,
+          themed(div-1) 10%,
           rgba(0, 212, 255, 0) 100%
         );
         opacity: 0.8;

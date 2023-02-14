@@ -231,5 +231,9 @@ a {
     bottom: 0;
     border-radius: 0 0 10px 10px;
     z-index: 1000;
+    &.active {
+      background: #a3d168;
+      cursor: default;
+    }
   }
 }
