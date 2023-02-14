@@ -23,6 +23,8 @@
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.0",
     "react-redux": "^8.0.5",
+    "react-router": "^6.8.1",
+    "react-router-dom": "^6.8.1",
     "redux": "^4.2.1",
     "regenerator-runtime": "^0.13.11"
   },

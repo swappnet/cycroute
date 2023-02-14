@@ -1,7 +1,11 @@
 import Home from './pages/Home';
-import { useState } from 'react';
 import Start from './pages/Start';
+
+import { useState } from 'react';
+
 import { useAppSelector } from './hooks/redux-hooks';
+import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 
 function App() {
   const [isNewRoute, setIsNewRoute] = useState<boolean>(false);
@@ -9,10 +13,12 @@ function App() {
 
   return (
     <div className={`App theme-${darkMode}`}>
-      {!isNewRoute && (
-        <Start newRoute={() => setIsNewRoute((isNewRoute) => !isNewRoute)} />
-      )}
-      {isNewRoute && <Home />}
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Start />}></Route>
+          <Route path="/Editor" element={<Home />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

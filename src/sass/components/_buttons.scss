@@ -8,6 +8,7 @@
     padding: 1rem;
     max-width: 250px;
     width: 100%;
+    text-align: center;
     cursor: pointer;
     @include on-hover {
       background: linear-gradient(91.88deg, #a4d168e0 6.89%, #6fc068e5 117.86%);
@@ -15,6 +16,9 @@
     -webkit-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
     -moz-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
     box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
+    &:visited {
+      color: #fff;
+    }
   }
 }
 

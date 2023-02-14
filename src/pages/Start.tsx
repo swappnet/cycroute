@@ -3,12 +3,12 @@ import githublogo from '../assets/githublogo.svg';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux-hooks';
 import { switchDark } from '../reducers/controlsReducer';
-import { MouseEventHandler } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const date = new Date();
 const year = date.getFullYear();
 
-function StartScreen({ newRoute }: { newRoute: MouseEventHandler }) {
+function StartScreen() {
   const darkMode = useAppSelector((state) => state.controlsReducer.darkMode);
   const dispatch = useAppDispatch();
 
@@ -23,9 +23,14 @@ function StartScreen({ newRoute }: { newRoute: MouseEventHandler }) {
             alt=""
           />
         </div>
-        <button className="start-button" onClick={newRoute}>
+        <NavLink
+          to="/Editor"
+          title="Create new route"
+          aria-label="Create new route"
+          className="start-button"
+        >
           New route
-        </button>
+        </NavLink>
       </div>
 
       <footer className="start--wrapper-bottom">
