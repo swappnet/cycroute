@@ -23,6 +23,12 @@ body {
   height: 100%;
   width: 100%;
   background-color: #bed4a0;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #2c2c2c;
+  }
 }
 
 html {

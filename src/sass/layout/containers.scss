@@ -132,7 +132,7 @@
     position: relative;
     margin-top: calc(130vw + 3.2rem);
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: hidden;
     @include media($from: 'sm') {
       position: absolute;
       max-width: 18.75rem;
@@ -165,29 +165,6 @@
         }
         .content-draw--wrapper {
           @include flexCenter(row, 1rem);
-          .content-draw-box {
-            @include flexCenter(column, 0.1rem);
-            background: themed(div-0);
-            border-radius: 10px;
-            padding: 0.3rem 0.7rem;
-            width: 6.25rem;
-            height: 6.5rem;
-            cursor: pointer;
-
-            &.active {
-              background: themed(div-1);
-              border-radius: 10px;
-            }
-            @include on-hover {
-              background: themed(div-1);
-              transition: 0.2s ease-in;
-            }
-            .content-draw-box--icon {
-              max-width: 50px;
-              max-height: 50px;
-              width: 100%;
-            }
-          }
         }
         .content-info--wrapper {
           @include flexCenter(row, 1rem);
@@ -207,45 +184,6 @@
         }
         .content-layers--wrapper {
           @include flexCenter(row, 1rem);
-          .content-layers-box {
-            width: 6.25rem;
-            height: 4.37rem;
-            @include flexCenter(row, 0px);
-            border-radius: 10px;
-            background: themed(div-0);
-            cursor: pointer;
-            position: relative;
-
-            .content-layers-box--icon {
-              width: 100%;
-              height: 100%;
-              border-radius: 10px;
-            }
-            .content-layers-box--icon--bg {
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              border-radius: 10px;
-              &:hover {
-                background: linear-gradient(
-                  0deg,
-                  themed(div-1) 40%,
-                  rgba(0, 212, 255, 0) 100%
-                );
-                opacity: 0.8;
-              }
-              z-index: 1002;
-              &.active {
-                background: linear-gradient(
-                  0deg,
-                  themed(div-1) 40%,
-                  rgba(0, 212, 255, 0) 100%
-                );
-                opacity: 0.8;
-                cursor: default;
-              }
-            }
-          }
         }
         .content-export--wrapper {
           @include flexCenter(row, 0.5rem);

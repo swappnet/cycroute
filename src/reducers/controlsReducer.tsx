@@ -22,7 +22,7 @@ export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
-    changeDraw: (state, action: PayloadAction<string>) => {
+    changeDraw: (state, action) => {
       return {
         ...state,
         draw: action.payload,

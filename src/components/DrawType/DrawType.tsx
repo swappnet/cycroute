@@ -26,7 +26,11 @@ export default function DrawType() {
               : dispatch(changeDraw('Road'))
           }
         >
-          <h3 className="content-draw-box--title">Follow Road</h3>
+          <h3 className="content-draw-box--title">
+            Follow
+            <br />
+            Road
+          </h3>
           <img className="content-draw-box--icon" src={RoadIcon} alt="" />
         </div>
         <div
@@ -43,7 +47,11 @@ export default function DrawType() {
               : dispatch(changeDraw('Hand'))
           }
         >
-          <h3 className="content-draw-box--title">Follow Hand</h3>
+          <h3 className="content-draw-box--title">
+            Follow
+            <br />
+            Hand
+          </h3>
           <img className="content-draw-box--icon" src={HandIcon} alt="" />
         </div>
       </div>
