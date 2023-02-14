@@ -1,26 +1,21 @@
-import { useState, useMemo, useEffect, useRef, EffectCallback } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import GeoUtil from 'leaflet-geometryutil';
 
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
+import StyleMap from './TileLayer';
+import GetPositionByDragging from './GetDragPosition';
+
+import useClickedCoords from '../../hooks/useClickedCoords';
+
 import Contributors from '../../components/Contributors/Contributors';
 
-import {
-  MapContainer,
-  TileLayer,
-  useMapEvents,
-  ZoomControl,
-} from 'react-leaflet';
+import { MapContainer, ZoomControl } from 'react-leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import {
-  updateDrawCoords,
-  updateDrawInfo,
-  updateExportCoords,
-} from '../../reducers/drawReducer';
-import { changeCurrentCoords } from '../../reducers/controlsReducer';
+import { updateDrawInfo, updateExportCoords } from '../../reducers/drawReducer';
 
 import startMarker from '../../assets/start-marker.svg';
 import midMarker from '../../assets/mid-marker.svg';
@@ -34,7 +29,6 @@ export default function Map() {
   const layer = useAppSelector((state) => state.controlsReducer);
   const drawInfo = useAppSelector((state) => state.drawReducer.drawInfo);
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
-  const darkMode = useAppSelector((state) => state.controlsReducer.darkMode);
 
   const dispatch = useAppDispatch();
 
@@ -49,57 +43,7 @@ export default function Map() {
     }
   }, [map, geocoderCoords]);
 
-  function StyleMap() {
-    const [mapUrl, setMapUrl] = useState<string>('');
-
-    useMemo(() => {
-      if (layer.layer === 'default') {
-        darkMode === 'dark'
-          ? setMapUrl(
-              'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-            )
-          : setMapUrl(
-              'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'
-            );
-      } else if (layer.layer === 'satellite') {
-        setMapUrl(
-          'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-        );
-      }
-    }, [layer.layer]);
-
-    return <TileLayer url={mapUrl} />;
-  }
-
-  const [clickedCoords, setClickedCoords] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-
-  useEffect(() => {
-    if (!map) return;
-
-    if (map) {
-      if (drawType === 'None') return;
-      if (drawType === 'Hand' || 'Road') {
-        map.on('click', (e: { latlng: { lat: number; lng: number } }) => {
-          setClickedCoords({ lat: e.latlng.lat, lng: e.latlng.lng });
-        });
-      }
-    }
-  }, [map, drawType]);
-
-  useEffect(() => {
-    if (!clickedCoords) return;
-
-    if (clickedCoords && drawType === 'Road') {
-      dispatch(updateDrawCoords(clickedCoords));
-    } else if (clickedCoords && drawType === 'Hand') {
-      dispatch(updateDrawCoords(clickedCoords));
-    } else {
-      setClickedCoords(null);
-    }
-  }, [clickedCoords]);
+  useClickedCoords(map);
 
   const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
   const RoutingMachineRef = useRef<L.Control | null>(null);
@@ -272,23 +216,6 @@ export default function Map() {
       }
     }
   }, [drawPolyline, drawCoords, drawType]);
-
-  function GetPositionByDragging() {
-    useMapEvents({
-      drag: (e: L.LeafletEvent) => {
-        dispatch(
-          changeCurrentCoords({
-            currentCoords: {
-              lat: e.target.getCenter().lat,
-              lng: e.target.getCenter().lng,
-              zoom: e.target.getZoom(),
-            },
-          })
-        );
-      },
-    });
-    return null;
-  }
 
   const mapWrapper = useMemo(
     () => (
