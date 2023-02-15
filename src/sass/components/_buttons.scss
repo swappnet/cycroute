@@ -227,7 +227,7 @@
       height: 100%;
       position: absolute;
       border-radius: 10px;
-      @media (hover: hover) {
+      @include on-hover {
         background: linear-gradient(
           180deg,
           themed(div-1) 10%,
