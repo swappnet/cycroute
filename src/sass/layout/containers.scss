@@ -139,9 +139,12 @@
 }
 
 .main-editor--wrapper {
-  height: 100%;
-  max-height: 100%;
-  width: 100%;
+  @include themify($themes) {
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    background-color: themed(bg-0);
+  }
 }
 
 .map--wrapper {
@@ -210,12 +213,12 @@
     border-top-left-radius: 0.2rem;
     border-top-right-radius: 0.2rem;
     padding-top: 0.5rem;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
     background: themed(bg-0);
     position: relative;
     margin-top: calc(130vw + 3.2rem);
     width: 100%;
-    overflow-y: hidden;
+    overflow-y: scroll;
     @include media($from: 'sm') {
       position: absolute;
       max-width: 18.75rem;
@@ -224,6 +227,7 @@
       margin-top: 3.1rem;
       height: 100%;
       z-index: 1000;
+      overflow-y: unset !important;
     }
 
     .content-arrow--wrapper {
@@ -235,7 +239,7 @@
       }
     }
     .editor-content {
-      margin: 0 1rem;
+      margin: 0 rem;
       @include flexCenter(column, 0px);
       .content-section {
         width: 100%;
