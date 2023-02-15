@@ -260,22 +260,27 @@ a {
 }
 
 .info-title {
-  font-family: $inter-font;
-  color: #161616;
-  font-weight: 800;
-  font-size: 2.25rem;
-  line-height: 2.6rem;
-  letter-spacing: -0.04em;
+  @include themify($themes) {
+    font-family: $inter-font;
+    color: #161616;
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 2.6rem;
+    letter-spacing: -0.04em;
+    color: themed(text-start-0);
+  }
 }
 
 .info-description {
-  font-family: $roboto-font;
-  font-weight: 400;
-  font-size: 1.2rem;
-  line-height: 1.56rem;
-  letter-spacing: -0.005em;
-  max-width: 80%;
-  color: #616161;
+  @include themify($themes) {
+    font-family: $roboto-font;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.56rem;
+    letter-spacing: -0.005em;
+    max-width: 80%;
+    color: themed(text-start-1);
+  }
 }
 
 .footer-link {
