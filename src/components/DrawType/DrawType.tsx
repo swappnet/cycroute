@@ -1,5 +1,5 @@
-import HandIcon from '../../assets/hand-icon.svg';
-import RoadIcon from '../../assets/road-icon.svg';
+import HandIcon from '../../assets/editor/hand-icon.svg';
+import RoadIcon from '../../assets/editor/road-icon.svg';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { changeDraw } from '../../reducers/controlsReducer';

@@ -221,6 +221,7 @@ a {
     z-index: 1000;
     &.active {
       background: #a3d168;
+      color: white;
       cursor: default;
     }
   }
