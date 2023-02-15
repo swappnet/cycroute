@@ -8,6 +8,9 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux-hooks';
 import { switchDark } from '../reducers/controlsReducer';
 import { NavLink } from 'react-router-dom';
 
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 const date = new Date();
 const year = date.getFullYear();
 
@@ -22,7 +25,7 @@ function StartScreen() {
           <div className="header-logo-wrapper">
             <h1 className="header-logo">cycroute</h1>
             <div className="header-logo-icon-wrapper">
-              <img src={headerlogo} alt="" className="header-logo-icon" />
+              <img src={headerlogo} alt="" className="header-logo-icon " />
             </div>
           </div>
           <div className="header-buttons-wrapper">
@@ -53,14 +56,15 @@ function StartScreen() {
       </header>
       <main className="start-main-wrapper">
         <div className="main-banner-wrapper">
-          <img src={banner} alt="Website banner" className="banner-image" />
+          <img
+            src={banner}
+            alt="Website banner"
+            className="banner-image lazyload"
+          />
           <h2 className="banner-title">CYCROUTE</h2>
           <div className="banner-gradient" />
         </div>
         <div className="main-content-wrapper">
-          <section className="content-ilus-wrapper">
-            <img src={preview} alt="" className="ilus-image" />
-          </section>
           <section className="content-info-wrapper">
             <h3 className="info-title">READY TO START?</h3>
             <p className="info-description">
@@ -74,6 +78,9 @@ function StartScreen() {
             >
               NEW ROUTE
             </NavLink>
+          </section>
+          <section className="content-ilus-wrapper">
+            <img src={preview} alt="" className="ilus-image lazyload" />
           </section>
         </div>
       </main>
