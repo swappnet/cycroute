@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { useEffect, useState } from 'react';
 import downloadjs from 'downloadjs';
+import { NavLink } from 'react-router-dom';
 
 const date = new Date();
 const current_date = `${date.getFullYear()}-${
@@ -147,6 +148,9 @@ export default function Export() {
           </div>
         )}
       </div>
+      <NavLink to="/" className="editor-back-link" title="Back to Home">
+        Back to Home
+      </NavLink>
     </>
   );
 }
