@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use '../abstracts' as *;
 
 //UNDO ICON
 .gg-undo {
@@ -18,7 +18,7 @@
 
 .gg-undo::before {
   @include themify($themes) {
-    content: "";
+    content: '';
     display: block;
     box-sizing: border-box;
     position: absolute;
@@ -50,7 +50,7 @@
 }
 .gg-redo::before {
   @include themify($themes) {
-    content: "";
+    content: '';
     display: block;
     box-sizing: border-box;
     position: absolute;
@@ -98,7 +98,7 @@
   margin-top: -4px;
   color: #9ebc78;
   &::after {
-    content: "";
+    content: '';
     display: block;
     box-sizing: border-box;
     position: absolute;
@@ -136,7 +136,7 @@
     margin-top: -4px;
     color: rgba(206, 183, 127, 0.59);
     &::before {
-      content: "";
+      content: '';
       display: block;
       box-sizing: border-box;
       position: absolute;
@@ -173,7 +173,7 @@
 }
 .gg-loadbar::before {
   @include themify($themes) {
-    content: "";
+    content: '';
     position: absolute;
     border-radius: 4px;
     background: currentColor;
@@ -210,4 +210,34 @@
     filter: invert(8%) sepia(100%) saturate(7492%) hue-rotate(2deg)
       brightness(98%) contrast(107%);
   }
+}
+
+.gg-add-r {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  transform: scale(var(--ggs, 1));
+  border-radius: 4px;
+}
+.gg-add-r::after,
+.gg-add-r::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 5px;
+  top: 8px;
+  left: 4px;
+}
+.gg-add-r::after {
+  width: 2px;
+  height: 10px;
+  top: 4px;
+  left: 8px;
 }

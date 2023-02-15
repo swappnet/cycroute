@@ -1,5 +1,5 @@
-import defaultIcn from '../../assets/default-icon.webp';
-import satelliteIcn from '../../assets/satellite-icon.webp';
+import defaultIcn from '../../assets/editor/default-icon.webp';
+import satelliteIcn from '../../assets/editor/satellite-icon.webp';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
 import { changeLayer } from '../../reducers/controlsReducer';
 import { addLatLng } from '../../reducers/geocoderReducer';

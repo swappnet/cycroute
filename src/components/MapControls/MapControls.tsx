@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addLatLng } from '../../reducers/geocoderReducer';
 import { updateDrawInfo } from '../../reducers/drawReducer';
 
-import deleteD from '../../assets/deleteD.svg';
+import deleteD from '../../assets/editor/deleteD.svg';
 
 import { useState, useEffect } from 'react';
 

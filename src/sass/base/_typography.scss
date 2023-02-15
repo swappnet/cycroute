@@ -32,7 +32,6 @@ a {
   letter-spacing: -0.035em;
   font-weight: 500;
   font-size: 2em;
-  line-height: 52px;
   font-style: normal;
   color: #a3d168;
 }
@@ -180,17 +179,6 @@ a {
   }
 }
 
-.start-copy {
-  @include themify($themes) {
-    bottom: 1rem;
-    font-family: $primary-font;
-    color: themed(text-7);
-    font-style: normal;
-    font-weight: 300;
-    font-size: 0.8rem;
-  }
-}
-
 .content-export-download--title {
   @include themify($themes) {
     font-family: $primary-font;
@@ -236,4 +224,84 @@ a {
       cursor: default;
     }
   }
+}
+
+.link-icon {
+  @include flexCenter(row, 0.2em);
+  width: 1.1rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header-logo {
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  font-size: 2em;
+  font-style: normal;
+  color: #a3d168;
+}
+
+.header-button-title {
+  @media (max-width: 327px) {
+    display: none;
+  }
+}
+
+.banner-title {
+  position: absolute;
+  font-weight: 700;
+  font-size: 4rem;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  letter-spacing: -0.04em;
+  color: #a4d168e3;
+  display: none;
+  @include media($from: 'md') {
+    display: block;
+    font-size: 9rem;
+    transform: translate(-50%, -50%);
+    bottom: auto;
+    top: 50%;
+  }
+}
+
+.info-title {
+  font-family: $inter-font;
+  color: #161616;
+  font-weight: 800;
+  font-size: 2.25rem;
+  line-height: 2.6rem;
+  letter-spacing: -0.04em;
+}
+
+.info-description {
+  font-family: $roboto-font;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.56rem;
+  letter-spacing: -0.005em;
+  max-width: 80%;
+  color: #616161;
+}
+
+.footer-link {
+  font-family: $roboto-font;
+  display: flex;
+  font-weight: 400;
+  align-items: center;
+  font-size: 1rem;
+  justify-content: center;
+  gap: 0.2em;
+  letter-spacing: -0.015em;
+  text-decoration-line: underline;
+  text-underline-offset: 0.1em;
+}
+
+.footer-copyright {
+  font-weight: 300;
+  margin-top: 1rem;
+  font-family: $inter-font;
+  color: rgba(255, 255, 255, 0.19);
+  letter-spacing: -0.06em;
+  font-size: 0.8rem;
 }

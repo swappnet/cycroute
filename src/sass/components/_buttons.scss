@@ -1,32 +1,13 @@
 @use '../abstracts' as *;
 
 .start-button {
-  @include themify($themes) {
-    background: linear-gradient(91.88deg, #a3d168 6.89%, #6fc068 117.86%);
-    border-radius: 15px;
-    border: none;
-    padding: 1rem;
-    max-width: 250px;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    @include on-hover {
-      background: linear-gradient(91.88deg, #a4d168e0 6.89%, #6fc068e5 117.86%);
-    }
-    -webkit-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
-    -moz-box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
-    box-shadow: 0px 0px 30px -3px rgba(164, 209, 104, 1);
-    &:visited {
-      color: #fff;
-    }
-  }
+  border: 3px solid #a3d168;
+  border-radius: 8px;
+  padding: 0.1em 0.3em;
 }
 
-.start-github--link {
-  @include flexCenter(row, 0.2em);
-  bottom: 3rem;
-  font-weight: 700;
-  -webkit-tap-highlight-color: transparent;
+.header-button {
+  @include flexCenter(row, 0.4em);
 }
 
 .content-export--button {
@@ -110,63 +91,6 @@
 
 .leaflet-control-zoom-out {
   border-radius: 0 0 50% 50% !important;
-}
-
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-  border-radius: 12px;
-  -webkit-tap-highlight-color: transparent;
-  margin-bottom: 1rem;
-  @include flexCenter(column, 0.2rem);
-  font-family: $primary-font;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #a3d168;
-  .theme-switch {
-    display: inline-block;
-    height: 1.9rem;
-    position: relative;
-    width: 4rem;
-    input {
-      display: none;
-    }
-    .slider {
-      background-color: #ccc;
-      bottom: 0;
-      cursor: pointer;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      transition: 0.4s;
-    }
-
-    .slider:before {
-      background-color: #fff;
-      bottom: 3px;
-      content: '';
-      height: 1.5rem;
-      left: 4px;
-      position: absolute;
-      transition: 0.4s;
-      width: 1.5rem;
-    }
-    input:checked + .slider {
-      background-color: #a3d168;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(33px);
-    }
-    .slider.round {
-      border-radius: 34px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
-    }
-  }
 }
 
 .download-form--submit {

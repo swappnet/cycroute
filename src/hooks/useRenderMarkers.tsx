@@ -1,9 +1,9 @@
 import { useAppSelector } from './redux-hooks';
 import { useEffect } from 'react';
 
-import startMarker from '../assets/start-marker.svg';
-import midMarker from '../assets/mid-marker.svg';
-import finishMarker from '../assets/finish-marker.svg';
+import startMarker from '../assets/editor/start-marker.svg';
+import midMarker from '../assets/editor/mid-marker.svg';
+import finishMarker from '../assets/editor/finish-marker.svg';
 
 import * as L from 'leaflet';
 

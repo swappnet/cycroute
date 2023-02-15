@@ -1,34 +1,106 @@
 @use '../abstracts' as *;
+
 .start--wrapper {
   @include themify($themes) {
-    @include flexCenter(column, 1rem);
     width: 100%;
     height: 100%;
-    padding: 1rem;
-    background-color: themed(bg-0);
-    .start--wrapper-top {
-      @include flexCenter(column, 1rem);
-    }
-    .start--wrapper-bottom {
-      position: fixed;
-      bottom: 0.3rem;
-      @include flexCenter(column, 0.5rem);
-      @media (max-height: 550px) {
-        position: relative;
-      }
-    }
-    .start-image--wrapper {
-      @media (max-height: 550px) {
-        display: none;
-      }
-      max-width: 250px;
-      min-width: 200px;
-      .start-image {
+    .start-header-wrapper {
+      width: 100%;
+      height: 3.7rem;
+      background: themed(bg-0);
+      .header-content {
+        color: #a3d168;
+        max-width: 950px;
+        margin: 0 auto;
         width: 100%;
+        padding: 0.5em 0.7em;
+        @include flexCenter(row, 0px);
+        justify-content: space-between;
+        .header-logo-wrapper {
+          @include flexCenter(row, 0.2em);
+          .header-logo-icon-wrapper {
+            max-width: 100%;
+            min-width: 1rem;
+            width: 100%;
+            .header-logo-icon {
+              width: 100%;
+              height: 100%;
+              @include flexCenter(row, 0.2em);
+            }
+          }
+        }
+      }
+    }
+    .start-main-wrapper {
+      width: 100%;
+      height: 100%;
+      background: themed(bg-0);
+      .main-banner-wrapper {
+        width: 100%;
+        max-height: 40vh;
+        height: 100%;
+        position: relative;
+        .banner-image {
+          width: 100%;
+          height: 100%;
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+        .banner-gradient {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          max-height: 100%;
+          max-width: 100%;
+          top: 0;
+          left: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.54) 0%,
+            rgba(217, 217, 217, 0) 100%
+          );
+        }
+      }
+      .main-content-wrapper {
+        margin: 0 auto;
+        max-width: 950px;
+        padding: 1em 0.7em;
+        @include flexCenter(column, 0.5em);
+        @include media($from: 'md') {
+          flex-direction: row-reverse;
+        }
+        .content-info-wrapper {
+          @include flexCenter(column, 0.5em);
+          align-items: flex-start;
+        }
+
+        .content-ilus-wrapper {
+          @include media($from: 'md') {
+            max-width: 25rem;
+          }
+          max-width: 20rem;
+          width: 100%;
+          padding: 1em 0.7em;
+          .ilus-image {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+    .footer-wrapper {
+      padding: 3rem 0 0.3rem 0;
+      width: 100%;
+      @include flexCenter(column, 0.5em);
+      justify-content: flex-end;
+      background: #161616;
+      @include media($from: 'md') {
+        padding: 5rem 0 0.3rem 0;
       }
     }
   }
-  transition: background 0.2s linear;
 }
 
 .header--wrapper {

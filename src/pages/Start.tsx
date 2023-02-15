@@ -1,5 +1,8 @@
-import startlogo from '../assets/startlogo.svg';
-import githublogo from '../assets/githublogo.svg';
+import githublogo from '../assets/startPage/githublogo.svg';
+import headerlogo from '../assets/headerlogo.svg';
+import linkedinlogo from '../assets/startPage/linkedin-icon.svg';
+import banner from '../assets/startPage/start-banner.webp';
+import preview from '../assets/startPage/main-preview.svg';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux-hooks';
 import { switchDark } from '../reducers/controlsReducer';
@@ -14,66 +17,72 @@ function StartScreen() {
 
   return (
     <div className="start--wrapper">
-      <div className="start--wrapper-top">
-        <div className="start-image--wrapper">
-          <img
-            src={startlogo}
-            className="start-image"
-            aria-label="Start Logo"
-            alt=""
-          />
+      <header className="start-header-wrapper">
+        <div className="header-content">
+          <div className="header-logo-wrapper">
+            <h1 className="header-logo">cycroute</h1>
+            <div className="header-logo-icon-wrapper">
+              <img src={headerlogo} alt="" className="header-logo-icon" />
+            </div>
+          </div>
+          <NavLink
+            to="/Editor"
+            className="header-button start-button"
+            title="Create new route"
+            aria-label="Create new route"
+          >
+            <div className="gg-add-r header-button-icon-wrapper" />
+            <p className="header-button-title">NEW ROUTE</p>
+          </NavLink>
         </div>
-        <NavLink
-          to="/Editor"
-          title="Create new route"
-          aria-label="Create new route"
-          className="start-button"
+      </header>
+      <main className="start-main-wrapper">
+        <div className="main-banner-wrapper">
+          <img src={banner} alt="Website banner" className="banner-image" />
+          <h2 className="banner-title">CYCROUTE</h2>
+          <div className="banner-gradient" />
+        </div>
+        <div className="main-content-wrapper">
+          <section className="content-ilus-wrapper">
+            <img src={preview} alt="" className="ilus-image" />
+          </section>
+          <section className="content-info-wrapper">
+            <h3 className="info-title">READY TO START?</h3>
+            <p className="info-description">
+              Start your cycling adventure by building a route{' '}
+            </p>
+            <NavLink
+              to="/Editor"
+              className="info-button start-button"
+              title="Create new route"
+              aria-label="Create new route"
+            >
+              NEW ROUTE
+            </NavLink>
+          </section>
+        </div>
+      </main>
+      <footer className="footer-wrapper">
+        <a
+          href="https://www.linkedin.com/in/vladokuskov/"
+          rel="noreferrer"
+          title="Go to project GitHub"
+          className="footer-link"
         >
-          New route
-        </NavLink>
-      </div>
-
-      <footer className="start--wrapper-bottom">
-        <div className="theme-switch-wrapper">
-          Dark theme
-          <label className="theme-switch" htmlFor="checkbox">
-            <input
-              type="checkbox"
-              id="checkbox"
-              title="Change theme"
-              aria-label="Change theme"
-              onChange={() => {
-                if (darkMode === 'dark') {
-                  dispatch(switchDark('light'));
-                } else if (darkMode === 'light') {
-                  dispatch(switchDark('dark'));
-                }
-              }}
-            />
-            <div className="slider round"></div>
-          </label>
-        </div>
-
+          <img alt="" src={linkedinlogo} className="link-icon" />
+          LinkedIn
+        </a>
         <a
           href="https://github.com/swappnet/cycroute"
-          className="start-github--link"
-          target="_blank"
-          title="Project in GitHub"
-          aria-label="Project in GitHub"
           rel="noreferrer"
-          tabIndex={0}
+          title="Go to project GitHub"
+          className="footer-link"
         >
-          <img
-            src={githublogo}
-            className="start-github--image"
-            aria-label="GitHub Logo"
-            alt=""
-          />
-          <span className="start-github--text">GitHub</span>
+          <img alt="" src={githublogo} className="link-icon" />
+          Github
         </a>
-        <p className="start-copy">
-          Copyright&copy;{` ${year} Vladyslav Okuskov`}
-        </p>
+
+        <p className="footer-copyright">©{year} Vladyslav Okuskov ' cycroute</p>
       </footer>
     </div>
   );
