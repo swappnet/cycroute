@@ -35,30 +35,19 @@ function StartScreen() {
               <div className="gg-add-r header-button-icon-wrapper" />
               <p className="header-button-title">NEW ROUTE</p>
             </NavLink>
-            <div className="darkmode-button-wrapper">
-              <div className="daynight">
-                <label htmlFor="checkbox">
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="checkbox"
-                    onChange={() => {
-                      if (darkMode === 'dark') {
-                        dispatch(switchDark('light'));
-                      } else if (darkMode === 'light') {
-                        dispatch(switchDark('dark'));
-                      }
-                    }}
-                  />
-                  <div className="toggle">
-                    <div className="cloud"></div>
-                    <div className="star"></div>
-                    <div className="sea"></div>
-                    <div className="mountains"></div>
-                  </div>
-                </label>
-              </div>
-            </div>
+            <>
+              <input
+                className="toggle"
+                type="checkbox"
+                onChange={() => {
+                  if (darkMode === 'dark') {
+                    dispatch(switchDark('light'));
+                  } else if (darkMode === 'light') {
+                    dispatch(switchDark('dark'));
+                  }
+                }}
+              />
+            </>
           </div>
         </div>
       </header>
