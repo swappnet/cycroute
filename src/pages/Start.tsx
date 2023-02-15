@@ -15,6 +15,7 @@ const date = new Date();
 const year = date.getFullYear();
 
 function StartScreen() {
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
   const darkMode = useAppSelector((state) => state.controlsReducer.darkMode);
   const dispatch = useAppDispatch();
 
@@ -32,11 +33,21 @@ function StartScreen() {
             <NavLink
               to="/Editor"
               className="header-button start-button"
-              title="Create new route"
-              aria-label="Create new route"
+              title={
+                drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
+              }
+              aria-label={
+                drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
+              }
             >
-              <div className="gg-add-r header-button-icon-wrapper" />
-              <p className="header-button-title">NEW ROUTE</p>
+              {drawCoords.length > 0 ? (
+                ''
+              ) : (
+                <div className="gg-add-r header-button-icon-wrapper" />
+              )}
+              <p className="header-button-title">
+                {drawCoords.length > 0 ? 'Continue' : 'NEW ROUTE'}
+              </p>
             </NavLink>
             <>
               <input
@@ -73,10 +84,14 @@ function StartScreen() {
             <NavLink
               to="/Editor"
               className="info-button start-button"
-              title="Create new route"
-              aria-label="Create new route"
+              title={
+                drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
+              }
+              aria-label={
+                drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
+              }
             >
-              NEW ROUTE
+              {drawCoords.length > 0 ? 'Continue editing' : 'NEW ROUTE'}
             </NavLink>
           </section>
           <section className="content-ilus-wrapper">
