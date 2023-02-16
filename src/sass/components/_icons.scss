@@ -203,8 +203,9 @@
 
 //DARK MODE TOGGLERS
 
-.map-controls--icon--delete {
-  max-width: 50px;
+.map-controls--icon {
+  max-width: 100%;
+  padding: 0.15rem;
   width: 100%;
   &.active {
     filter: invert(8%) sepia(100%) saturate(7492%) hue-rotate(2deg)
@@ -240,4 +241,32 @@
   height: 10px;
   top: 4px;
   left: 8px;
+}
+
+.gg-close {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 0px solid transparent;
+  border-radius: 40px;
+}
+.gg-close::after,
+.gg-close::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0.9rem;
+  height: 2.5px;
+  background: currentColor;
+  transform: rotate(45deg);
+  border-radius: 6px;
+  top: 2px;
+  left: -3px;
+}
+.gg-close::after {
+  transform: rotate(-45deg);
 }

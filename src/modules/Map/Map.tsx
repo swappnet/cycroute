@@ -4,11 +4,11 @@ import * as L from 'leaflet';
 
 //Hooks import
 import GetPositionByDragging from './GetDragPosition';
-import useUpdateMapView from '../../hooks/useUpdateMapView';
-import useRenderRouting from '../../hooks/useRenderRouting';
-import useClickedCoords from '../../hooks/useClickedCoords';
-import useRenderPolyline from '../../hooks/useRenderPolyline';
-import useRenderMarkers from '../../hooks/useRenderMarkers';
+import useUpdateMapView from '../../hooks/updateMapView';
+import useRenderRouting from '../../hooks/renderRouting';
+import useClickedCoords from '../../hooks/updateClickedCoords';
+import useRenderPolyline from '../../hooks/renderPolyline';
+import useRenderMarkers from '../../hooks/renderMarkers';
 
 //Components import
 import Contributors from '../../components/Contributors/Contributors';
@@ -29,6 +29,7 @@ export default function Map() {
   useRenderMarkers(map);
   //---HooksEnd---
 
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
   const layer = useAppSelector((state) => state.controlsReducer);
 

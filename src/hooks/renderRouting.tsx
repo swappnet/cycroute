@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -13,6 +13,9 @@ const useRenderRouting = (e: L.Map | null) => {
 
   const dispatch = useAppDispatch();
 
+  const lineColor = useAppSelector(
+    (state) => state.controlsReducer.colorPicker.color
+  );
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
   const drawInfo = useAppSelector((state) => state.drawReducer.drawInfo);
@@ -35,7 +38,7 @@ const useRenderRouting = (e: L.Map | null) => {
         show: false,
         routeWhileDragging: false,
         lineOptions: {
-          styles: [{ color: '#00ACC1', opacity: 1, weight: 4 }],
+          styles: [{ color: lineColor, opacity: 1, weight: 4 }],
           extendToWaypoints: true,
           missingRouteTolerance: 0,
           addWaypoints: false,
@@ -51,7 +54,7 @@ const useRenderRouting = (e: L.Map | null) => {
         }
       };
     }
-  }, [e, drawCoords]);
+  }, [e, drawCoords, lineColor]);
 
   useEffect(() => {
     if (!routingMachine) return;
@@ -59,6 +62,7 @@ const useRenderRouting = (e: L.Map | null) => {
 
     if (e) {
       if (routingMachine && drawType === 'Road') {
+        e.removeControl(routingMachine);
         routingMachine.addTo(e);
       } else if (routingMachine && drawType === 'Hand') {
         e.removeControl(routingMachine);

@@ -1,7 +1,7 @@
 import Header from '../components/Header/Header';
 import Editor from '../modules/Editor/Editor';
 
-function MainScreen() {
+function EditorPage() {
   return (
     <div className="mainscreen-wrapper">
       <Header />
@@ -10,4 +10,4 @@ function MainScreen() {
   );
 }
 
-export default MainScreen;
+export default EditorPage;

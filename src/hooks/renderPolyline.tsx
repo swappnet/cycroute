@@ -10,6 +10,9 @@ import { updateDrawInfo, updateExportCoords } from '../reducers/drawReducer';
 const useRenderPolyline = (e: L.Map | null) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const lineColor = useAppSelector(
+    (state) => state.controlsReducer.colorPicker.color
+  );
 
   const dispatch = useAppDispatch();
 
@@ -20,7 +23,7 @@ const useRenderPolyline = (e: L.Map | null) => {
 
     if (e) {
       const polyline = L.polyline(drawCoords as any, {
-        color: '#00ACC1',
+        color: lineColor,
         weight: 4,
       });
 
@@ -29,7 +32,7 @@ const useRenderPolyline = (e: L.Map | null) => {
         return () => polyline.remove();
       }
     }
-  }, [e, drawCoords]);
+  }, [e, drawCoords, lineColor]);
 
   useEffect(() => {
     if (!drawPolyline) return;

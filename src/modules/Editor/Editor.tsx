@@ -5,12 +5,14 @@ import Info from '../../components/Info/Info';
 import Layers from '../../components/Layers/Layers';
 import MapControls from '../../components/MapControls/MapControls';
 import Export from '../../components/Export/Export';
+import ColorPicker from '../../components/ColorPicker/ColorPicker';
 
 function Editor() {
   return (
     <main className="main-editor--wrapper">
       <Map />
       <MapControls />
+      <ColorPicker />
       <div className="editor--wrapper">
         <div className="content-arrow--wrapper">
           <div className="arrow" />

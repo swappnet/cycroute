@@ -309,3 +309,9 @@ a {
   margin-top: 1rem;
   -webkit-tap-highlight-color: transparent;
 }
+
+.picker-title {
+  @include themify($themes) {
+    color: themed(text-6);
+  }
+}

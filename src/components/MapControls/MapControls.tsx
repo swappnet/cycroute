@@ -3,9 +3,12 @@ import {
   redoDrawCoords,
   undoDrawCoords,
 } from '../../reducers/drawReducer';
+
+import colorPicker from '../../assets/editor/picker.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addLatLng } from '../../reducers/geocoderReducer';
 import { updateDrawInfo } from '../../reducers/drawReducer';
+import { showColorPicker } from '../../reducers/controlsReducer';
 
 import deleteD from '../../assets/editor/deleteD.svg';
 
@@ -22,6 +25,9 @@ export default function MapControls() {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const isPickerOpen = useAppSelector(
+    (state) => state.controlsReducer.colorPicker.isOpen
+  );
   const currentCoords = useAppSelector(
     (state) => state.controlsReducer.currentCoords
   );
@@ -125,9 +131,21 @@ export default function MapControls() {
           alt=""
           className={
             drawCoords.length !== 0
-              ? 'map-controls--icon--delete active'
-              : 'map-controls--icon--delete disabled'
+              ? 'map-controls--icon  active'
+              : 'map-controls--icon  disabled'
           }
+        />
+      </button>
+      <button
+        className="map-controls--button"
+        title="Change line color"
+        aria-label="Change line color"
+        onClick={() => dispatch(showColorPicker(!isPickerOpen))}
+      >
+        <img
+          src={colorPicker}
+          alt=""
+          className="map-controls--icon color-picker--icon"
         />
       </button>
       <button
