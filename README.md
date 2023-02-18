@@ -1,6 +1,6 @@
 # CYCROUTE
 
-CYCROUTE - website to create bike routes and export them in GPX format. 
+CYCROUTE - website to create bike routes and export them in GPX/KML format. 
 
 ## Features
 
