@@ -17,7 +17,7 @@ CYCROUTE - website to create bike routes and export them in GPX format.
 * ~~Add start page~~;
 * Add help window;
 * ~~Implement route color changing~~;
-* Add KML export;
+* ~~Add KML export~~;
 * Save session after restart;
 * Add elevation High/Low to Defatils section;
 * Add route editing by dragging a waypoint;
