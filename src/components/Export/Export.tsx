@@ -1,36 +1,69 @@
 import { useAppSelector } from '../../hooks/redux-hooks';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import downloadjs from 'downloadjs';
 import { NavLink } from 'react-router-dom';
+
+import Select, { StylesConfig } from 'react-select';
 
 const date = new Date();
 const current_date = `${date.getFullYear()}-${
   date.getMonth() + 1
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`;
 
+enum ExportType {
+  none,
+  gpx,
+  kml,
+}
+
+type SelectOptionType = { value: string | number; label: string };
+
+const options = [
+  { value: 1, label: 'GPX' },
+  { value: 2, label: 'KML' },
+];
+
+const customStyles: StylesConfig<SelectOptionType, false> = {
+  option: (base, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...base,
+      backgroundColor: isFocused ? 'rgba(255, 255, 255, 0.31)' : '',
+    };
+  },
+};
+
 export default function Export() {
   const exportCoords = useAppSelector(
     (state) => state.drawReducer.exportCoords
   );
 
-  const [paths, setPaths] = useState<string[] | null>(null);
   const [filename, setFilename] = useState<string>('');
+  const [exportType, setExportType] = useState(ExportType.none);
 
-  const XMLHeader = `<?xml version="1.0" encoding="UTF-8"?>
- <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycroute.netlify.app/">`;
+  const handleChange = (option: SelectOptionType | null) => {
+    if (option) {
+      if (option.value === 1) {
+        setExportType(ExportType.gpx);
+      } else if (option.value === 2) {
+        setExportType(ExportType.kml);
+      }
+    }
+  };
 
-  const metadata = `
+  const generateGPX = (coords: any) => {
+    let gpx = `<?xml version="1.0" encoding="UTF-8"?>
+  <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycroute.netlify.app/">
   <metadata>
-  <name>${
-    filename.length === 0 || !filename ? `new_route_${current_date}` : filename
-  }</name>
+    <name>${
+      filename.length === 0 || !filename
+        ? `new_route_${current_date}`
+        : filename
+    }</name>
   <author>
     <name>cycroute</name>
     <link href="https://cycroute.netlify.app/"></link>
   </author>
-  </metadata>`;
-
-  const gpxStart = `
+  </metadata>
   <trk>
     <name>${
       filename.length === 0 || !filename
@@ -38,28 +71,46 @@ export default function Export() {
         : filename
     }</name>
     <type>Cycling</type>
-    <trkseg>\n`;
+    <trkseg>`;
 
-  const gpxEnd = `
+    coords.forEach((coord: any) => {
+      gpx += `
+      <trkpt lat="${coord.lat}" lon="${coord.lng}"></trkpt>`;
+    });
+
+    gpx += `
     </trkseg>
-  </trk>
-</gpx>`;
+    </trk>
+  </gpx>`;
 
-  function createPaths() {
-    if (exportCoords.length !== 0) {
-      setPaths(
-        exportCoords.map((coords) => {
-          return `<trkpt lat="${coords.lat}" lon="${coords.lng}"></trkpt>\n`;
-        })
-      );
-    } else if (exportCoords.length === 0) {
-      return null;
-    }
-  }
+    return gpx;
+  };
 
-  useEffect(() => {
-    createPaths();
-  }, [exportCoords]);
+  const generateKML = (coords: any) => {
+    let kml = `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>${
+    filename.length === 0 || !filename ? `new_route_${current_date}` : filename
+  }</name>`;
+
+    coords.forEach((coord: any, index: any) => {
+      kml += `
+  <Placemark>
+    <name>Point ${index + 1}</name>
+    <description>Waypoint</description>
+    <Point>
+      <coordinates>${coord.lng},${coord.lat},0</coordinates>
+    </Point>
+  </Placemark>`;
+    });
+
+    kml += `
+</Document>
+</kml>`;
+
+    return kml;
+  };
 
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
 
@@ -72,44 +123,69 @@ export default function Export() {
   };
 
   const handleDownload = () => {
-    if (paths) {
-      downloadjs(
-        new Blob([
-          XMLHeader +
-            metadata +
-            gpxStart +
-            paths.map((path) => path).join('') +
-            gpxEnd,
-        ]),
-        `${
-          filename.length === 0 || !filename
-            ? `new_route_${current_date}`
-            : filename
-        }.gpx`,
-        'application/gpx+xml'
-      );
-    }
+    const kml = generateKML(exportCoords);
+    const gpx = generateGPX(exportCoords);
 
-    setIsFormOpen(false);
-    setFilename('');
+    if (exportCoords) {
+      if (exportType === ExportType.none) {
+        return null;
+      }
+      if (exportType === ExportType.gpx) {
+        downloadjs(
+          gpx,
+          `${
+            filename.length === 0 || !filename
+              ? `new_route_${current_date}`
+              : filename
+          }.gpx`,
+          'application/gpx+xml'
+        );
+      }
+      if (exportType === ExportType.kml) {
+        downloadjs(
+          kml,
+          `${
+            filename.length === 0 || !filename
+              ? `new_route_${current_date}`
+              : filename
+          }.kml`,
+          'application/vnd.google-earth.kml+xml'
+        );
+      }
+
+      setIsFormOpen(false);
+      setFilename('');
+    }
   };
 
   return (
     <>
       <p className="content-section--title">Export</p>
       <div className="content-export--wrapper">
+        <Select
+          styles={customStyles}
+          classNamePrefix={'export-select'}
+          className="content-export--select"
+          name="selectedExportType"
+          aria-label="export type"
+          placeholder="Export type"
+          closeMenuOnSelect={true}
+          onChange={handleChange}
+          options={options}
+        />
+
         <button
           className={
-            exportCoords.length === 0 || isFormOpen
+            exportCoords.length === 0 || exportType === 0 || isFormOpen
               ? 'content-export--button disabled-export'
               : 'content-export--button'
           }
-          title="Export GPX"
-          aria-label="Export GPX"
+          title={`Export as ${exportType === 1 ? 'GPX' : 'KML'}`}
+          aria-label={`Export as ${exportType === 1 ? 'GPX' : 'KML'}`}
           onClick={handleExport}
-          disabled={exportCoords.length === 0 || isFormOpen}
+          disabled={exportCoords.length === 0 || exportType === 0 || isFormOpen}
         >
-          Export as GPX
+          Export as {exportType === 0 ? '' : exportType === 1 ? 'GPX' : 'KML'}
         </button>
         {isFormOpen && (
           <div className="content-export-download--wrapper">
@@ -137,8 +213,8 @@ export default function Export() {
               />
               <button
                 className="download-form--submit"
-                title="Download GPX"
-                aria-label="Download GPX"
+                title={`Download ${exportType === 1 ? 'GPX' : 'KML'}`}
+                aria-label={`Download ${exportType === 1 ? 'GPX' : 'KML'}`}
                 onClick={handleDownload}
                 tabIndex={0}
               >

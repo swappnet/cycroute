@@ -1,6 +1,7 @@
 $themes: (
   light: (
     bg-0: #f9f9f9,
+    bg-select-0: rgb(204, 204, 204),
     button-0: #f9f9f9,
     button-1: #f3f3f3,
     button-2: rgba(0, 0, 0, 0.2),
@@ -31,6 +32,7 @@ $themes: (
     text-6: rgba(29, 29, 29, 0.37),
     text-7: rgba(0, 0, 0, 0.411),
     text-8: rgb(209, 209, 209),
+    text-select-0: rgba(0, 0, 0, 0.616),
     text-start-0: #161616,
     text-start-1: #616161,
     icon-0: rgb(31, 31, 31),
@@ -40,6 +42,7 @@ $themes: (
   ),
   dark: (
     bg-0: #252525,
+    bg-select-0: #424242,
     button-0: #252525,
     button-1: #4e4e4e,
     button-2: rgb(148, 148, 148),
@@ -70,6 +73,7 @@ $themes: (
     text-6: rgba(231, 231, 231, 0.486),
     text-7: rgba(139, 139, 139, 0.541),
     text-8: rgba(31, 31, 31, 0.89),
+    text-select-0: #cdcdcd,
     text-start-0: #dedede,
     text-start-1: #989898,
     icon-0: rgba(204, 204, 204, 0.897),

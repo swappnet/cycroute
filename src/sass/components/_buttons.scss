@@ -217,6 +217,21 @@
     cursor: pointer;
     position: relative;
 
+    @include on-hover {
+      .content-layers-box--icon--bg {
+        background: linear-gradient(
+          180deg,
+          themed(div-1) 10%,
+          rgba(0, 212, 255, 0) 100%
+        );
+        opacity: 0.8;
+      }
+      .content-layers-box--title {
+        background: #a3d168;
+        transition: 0.2s;
+        color: white;
+      }
+    }
     .content-layers-box--icon {
       width: 100%;
       height: 100%;
@@ -227,14 +242,6 @@
       height: 100%;
       position: absolute;
       border-radius: 10px;
-      @include on-hover {
-        background: linear-gradient(
-          180deg,
-          themed(div-1) 10%,
-          rgba(0, 212, 255, 0) 100%
-        );
-        opacity: 0.8;
-      }
       z-index: 1002;
       &.active {
         background: linear-gradient(
@@ -262,10 +269,16 @@
     &.active {
       background: themed(div-1);
       border-radius: 10px;
+      .content-draw-box--title {
+        color: white;
+      }
     }
     @include on-hover {
       background: themed(div-1);
-      transition: 0.2s ease-in;
+      transition: 0.2s;
+      .content-draw-box--title {
+        color: white;
+      }
     }
     .content-draw-box--icon {
       max-width: 50px;

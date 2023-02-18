@@ -312,7 +312,7 @@
           @include flexCenter(row, 1rem);
         }
         .content-export--wrapper {
-          @include flexCenter(row, 0.5rem);
+          @include flexCenter(column, 1rem);
           width: 70%;
           .content-export-download--wrapper {
             @include media($from: 'sm') {

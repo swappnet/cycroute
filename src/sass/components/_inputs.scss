@@ -82,3 +82,37 @@
     }
   }
 }
+
+.content-export--select {
+  @include themify($themes) {
+    font-family: $primary-font;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    max-width: 10rem;
+    .export-select__control--is-focused {
+      box-shadow: 0 0 1px #bedb94;
+    }
+    .export-select__control {
+      background-color: transparent;
+      border: 2px solid #a3d168;
+    }
+    .export-select__placeholder {
+      color: themed(text-select-0);
+    }
+    .export-select__single-value {
+      color: themed(text-select-0);
+    }
+    .export-select__input-container {
+      color: themed(text-select-0);
+    }
+    .export-select__menu {
+      background: themed(bg-select-0);
+      .export-select__option {
+        color: themed(text-select-0);
+      }
+    }
+  }
+}
