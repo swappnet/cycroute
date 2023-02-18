@@ -8,8 +8,8 @@ CYCROUTE - website to create bike routes and export them in GPX format.
 - Change map styles
 - Change route draw styles
 - Undo, Redo, Clear All, Find location
-- Export file as GPX
-
+- Export GPX/KML
+- Change route color
 
 ## TO-DO
 
