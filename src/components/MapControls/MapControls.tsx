@@ -5,6 +5,7 @@ import {
 } from '../../reducers/drawReducer';
 
 import colorPicker from '../../assets/editor/picker.svg';
+import colorPickerL from '../../assets/editor/pickerL.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addLatLng } from '../../reducers/geocoderReducer';
 import { updateDrawInfo } from '../../reducers/drawReducer';
@@ -25,6 +26,8 @@ export default function MapControls() {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const theme = useAppSelector((state) => state.controlsReducer.darkMode);
+
   const isPickerOpen = useAppSelector(
     (state) => state.controlsReducer.colorPicker.isOpen
   );
@@ -143,7 +146,7 @@ export default function MapControls() {
         onClick={() => dispatch(showColorPicker(!isPickerOpen))}
       >
         <img
-          src={colorPicker}
+          src={theme === 'light' ? colorPickerL : colorPicker}
           alt=""
           className="map-controls--icon color-picker--icon"
         />
