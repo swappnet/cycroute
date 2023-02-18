@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IDrawCoords {
+export interface IDrawCoords {
   lat?: number;
   lng?: number;
 }
