@@ -169,6 +169,7 @@ export default function Export() {
           name="selectedExportType"
           aria-label="export type"
           placeholder="Export type"
+          isSearchable={false}
           closeMenuOnSelect={true}
           onChange={handleChange}
           options={options}
