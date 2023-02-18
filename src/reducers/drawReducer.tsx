@@ -6,7 +6,7 @@ export interface IDrawCoords {
 }
 
 interface IDrawReducer {
-  drawInfo: { time?: string; dist?: string | number };
+  drawInfo: { time?: number | string; dist?: string | number };
   drawCoords: IDrawCoords[];
   exportCoords: IDrawCoords[];
   drawCoordsDeleted: IDrawCoords[];
@@ -33,7 +33,7 @@ export const drawReducer = createSlice({
     },
     updateDrawInfo: (
       state,
-      action: PayloadAction<{ time: string; dist: number | string }>
+      action: PayloadAction<{ time: number | string; dist: number | string }>
     ) => {
       return {
         ...state,

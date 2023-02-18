@@ -55,10 +55,9 @@ const useRenderPolyline = (e: L.Map | null) => {
       for (let i = 0; i < polylineDist.length; i++) {
         dispatch(
           updateDrawInfo({
-            time: String(polylineDist[i] / 1000 / 11)
-              .slice(0, 5)
-              .replace('.', ','),
-            dist: Math.floor(polylineDist[i] / 1000),
+            time: (polylineDist[i] / 1000 / 11).toFixed(2),
+
+            dist: (polylineDist[i] / 1000).toFixed(1),
           })
         );
         if (drawCoords.length === 0) {

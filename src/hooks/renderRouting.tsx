@@ -77,10 +77,8 @@ const useRenderRouting = (e: L.Map | null) => {
       (routingMachine as any).on('routesfound', function (e: any) {
         dispatch(
           updateDrawInfo({
-            time: String(e.routes[0].summary.totalTime / 3600)
-              .slice(0, 5)
-              .replace('.', ','),
-            dist: Math.floor(e.routes[0].summary.totalDistance / 1000),
+            time: (e.routes[0].summary.totalTime / 3600).toFixed(2),
+            dist: (e.routes[0].summary.totalDistance / 1000).toFixed(1),
           })
         );
         dispatch(updateExportCoords(e.routes[0].coordinates));
