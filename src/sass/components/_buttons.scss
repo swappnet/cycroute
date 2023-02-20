@@ -334,3 +334,17 @@ body {
 .toggle {
   z-index: 1;
 }
+
+.picker-submit-button {
+  @include themify($themes) {
+    font-family: $primary-font;
+    font-weight: 500;
+    cursor: pointer;
+    color: themed(button-0);
+    background: themed(button-4);
+    width: 100%;
+    padding: 0.6rem 0;
+    border: 0px;
+    border-radius: 0 0 10px 10px;
+  }
+}

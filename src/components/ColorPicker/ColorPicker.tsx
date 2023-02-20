@@ -15,6 +15,7 @@ const ColorPicker = () => {
   const lineColor = useAppSelector(
     (state) => state.controlsReducer.colorPicker.color
   );
+  const [color, setColor] = useState(lineColor);
 
   const dispatch = useAppDispatch();
 
@@ -35,10 +36,15 @@ const ColorPicker = () => {
           </div>
           <p className="picker-title">Line color</p>
         </div>
-        <HexColorPicker
-          color={lineColor}
-          onChange={(e) => dispatch(changeLineColor(e))}
-        />
+        <HexColorPicker color={color} onChange={setColor} />
+        <button
+          className="picker-submit-button"
+          title="Submit color"
+          aria-label="Sumbit color"
+          onClick={() => dispatch(changeLineColor(color))}
+        >
+          Submit
+        </button>
       </div>
     );
   } else return null;
