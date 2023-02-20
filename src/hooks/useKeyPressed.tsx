@@ -11,7 +11,10 @@ const useKeyPressed = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      setKeyPressed({ key: e.key, code: e.code });
+      const isInputField = e.target instanceof HTMLInputElement;
+      if (!isInputField) {
+        setKeyPressed({ key: e.key, code: e.code });
+      }
     };
 
     const handleKeyUp = () => {
