@@ -1,4 +1,6 @@
-CYCROUTE - website to create bike routes and export them in GPX/KML format.
+# CYCROUTE
+
+CYCROUTE - website to create bike routes and export them in GPX format.
 
 ## Features
 
@@ -13,11 +15,13 @@ CYCROUTE - website to create bike routes and export them in GPX/KML format.
 
 - ~~Migrate project to TypeScript~~;
 - ~~Add start page~~;
+- Add help window;
 - ~~Implement route color changing~~;
 - ~~Add KML export~~;
 - Save session after restart;
+- Add elevation High/Low to Defatils section;
 - Add route editing by dragging a waypoint;
-- ~~Add keyboard shortcuts ~~;
+- Add keyboard shortcuts;
 
 ## Tech
 
