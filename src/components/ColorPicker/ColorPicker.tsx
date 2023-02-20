@@ -4,7 +4,9 @@ import {
   showColorPicker,
 } from '../../reducers/controlsReducer';
 
-import { SketchPicker } from 'react-color';
+import { HexColorPicker } from 'react-colorful';
+
+import { useState } from 'react';
 
 const ColorPicker = () => {
   const isPickerOpen = useAppSelector(
@@ -33,10 +35,9 @@ const ColorPicker = () => {
           </div>
           <p className="picker-title">Line color</p>
         </div>
-
-        <SketchPicker
+        <HexColorPicker
           color={lineColor}
-          onChangeComplete={(e) => dispatch(changeLineColor(e.hex))}
+          onChange={(e) => dispatch(changeLineColor(e))}
         />
       </div>
     );

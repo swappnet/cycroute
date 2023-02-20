@@ -158,7 +158,7 @@
 }
 
 .map--wrapper {
-  cursor: grab;
+  cursor: crosshair;
   width: 100%;
   position: fixed;
   top: 3.2rem;
@@ -190,20 +190,19 @@
 
 .picker-wrapper {
   @include themify($themes) {
+    @include flexCenter(column, 1rem);
     .picker-header-wrapper {
-      @include flexCenter(row, 0.5rem);
+      height: 2rem;
+      @include flexCenter(row, 0px);
       width: 100%;
-      height: 100%;
       .picker-close {
         right: auto;
         left: 0;
         border-radius: 10px 0px 10px 0;
-        padding: 0.8rem;
       }
     }
 
     background-color: themed(bg-0);
-    padding-top: 2rem;
     position: fixed;
     right: 3.5rem;
     top: 13.5rem;
@@ -215,10 +214,6 @@
     @media (max-height: 374px) {
       right: auto;
       left: 21rem;
-    }
-    .sketch-picker {
-      background-color: themed(bg-0) !important;
-      box-shadow: none !important;
     }
   }
 }

@@ -89,7 +89,7 @@
     font-weight: 500;
     font-size: 0.9rem;
     text-align: center;
-    cursor: pointer;
+
     width: 100%;
     max-width: 10rem;
 
@@ -100,6 +100,7 @@
       background-color: transparent;
       border: 2px solid #a3d168;
       border-radius: 10px;
+      cursor: pointer;
     }
     .export-select__placeholder {
       color: themed(text-select-0);
@@ -114,6 +115,7 @@
       background: themed(bg-select-0);
       .export-select__option {
         color: themed(text-select-0);
+        cursor: pointer;
       }
     }
   }
