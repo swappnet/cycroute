@@ -92,12 +92,14 @@
     cursor: pointer;
     width: 100%;
     max-width: 10rem;
+
     .export-select__control--is-focused {
       box-shadow: 0 0 1px #bedb94;
     }
     .export-select__control {
       background-color: transparent;
       border: 2px solid #a3d168;
+      border-radius: 10px;
     }
     .export-select__placeholder {
       color: themed(text-select-0);

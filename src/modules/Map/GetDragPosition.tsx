@@ -1,6 +1,9 @@
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { useMapEvents } from 'react-leaflet';
-import { changeCurrentCoords } from '../../reducers/controlsReducer';
+import {
+  changeCurrentCoords,
+  changeLocationStatus,
+} from '../../reducers/controlsReducer';
 
 function GetPositionByDragging() {
   const dispatch = useAppDispatch();
@@ -15,6 +18,9 @@ function GetPositionByDragging() {
           },
         })
       );
+    },
+    dragstart: () => {
+      dispatch(changeLocationStatus(false));
     },
   });
   return null;

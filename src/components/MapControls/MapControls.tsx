@@ -8,8 +8,13 @@ import colorPicker from '../../assets/editor/picker.svg';
 import colorPickerL from '../../assets/editor/pickerL.svg';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addLatLng } from '../../reducers/geocoderReducer';
+import {
+  changeCurrentCoords,
+  changeLocationStatus,
+} from '../../reducers/controlsReducer';
 import { updateDrawInfo } from '../../reducers/drawReducer';
 import { showColorPicker } from '../../reducers/controlsReducer';
+import useKeyPressed from '../../hooks/useKeyPressed';
 
 import deleteD from '../../assets/editor/deleteD.svg';
 
@@ -22,17 +27,20 @@ const options = {
 };
 
 export default function MapControls() {
+  const [isLocationFetching, setIsLocationFetching] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
-  const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const isLocationFound = useAppSelector(
+    (state) => state.controlsReducer.isLocationFound
+  );
   const theme = useAppSelector((state) => state.controlsReducer.darkMode);
+
+  const { code } = useKeyPressed();
 
   const isPickerOpen = useAppSelector(
     (state) => state.controlsReducer.colorPicker.isOpen
-  );
-  const currentCoords = useAppSelector(
-    (state) => state.controlsReducer.currentCoords
   );
   const drawCoordsDeleted = useAppSelector(
     (state) => state.drawReducer.drawCoordsDeleted
@@ -41,26 +49,25 @@ export default function MapControls() {
     (state) => state.drawReducer.drawCoordsFuture
   );
 
-  useEffect(() => {
-    if (currentCoords !== geocoderCoords) {
-      setIsLocationFound(false);
-    }
-  }, [currentCoords]);
-
-  const [isLocationFetching, setIsLocationFetching] = useState<boolean>(false);
-  const [isLocationFound, setIsLocationFound] = useState<boolean>(false);
-
   const getPos = (data: {
     coords: { latitude: number; longitude: number };
   }) => {
-    console.log(typeof data);
-    setIsLocationFound(true);
     setIsLocationFetching(false);
+    dispatch(changeLocationStatus(true));
     dispatch(
       addLatLng({
         lat: data.coords.latitude,
         lng: data.coords.longitude,
         zoom: 12,
+      })
+    );
+    dispatch(
+      changeCurrentCoords({
+        currentCoords: {
+          lat: data.coords.latitude,
+          lng: data.coords.longitude,
+          zoom: 12,
+        },
       })
     );
   };
@@ -76,14 +83,36 @@ export default function MapControls() {
     }
   }, [isLocationFetching]);
 
-  //FIXME Fix bug with layers return position to start when use location;
+  useEffect(() => {
+    if (code === 'KeyQ') {
+      dispatch(undoDrawCoords(null));
+    }
+    if (code === 'KeyE') {
+      dispatch(redoDrawCoords(null));
+    }
+    if (code === 'KeyD') {
+      dispatch(deleteDrawCoords(null));
+      dispatch(
+        updateDrawInfo({
+          time: '0000',
+          dist: '0000',
+        })
+      );
+    }
+    if (code === 'KeyL') {
+      setIsLocationFetching(true);
+    }
+    if (code === 'KeyJ') {
+      dispatch(showColorPicker(!isPickerOpen));
+    }
+  }, [code]);
 
   return (
     <div className="map-controls--wrapper">
       <button
         className="map-controls--button"
-        title="Undo action"
-        aria-label="Undo action"
+        title="Undo action [Q]"
+        aria-label="Undo action [Q]"
         disabled={drawCoords.length === 0 || drawType === 'None'}
         onClick={() => dispatch(undoDrawCoords(null))}
       >
@@ -97,8 +126,8 @@ export default function MapControls() {
       </button>
       <button
         className="map-controls--button"
-        title="Redo action"
-        aria-label="Redo action"
+        title="Redo action [E]"
+        aria-label="Redo action [E]"
         disabled={
           drawType === 'None' ||
           (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0)
@@ -116,8 +145,8 @@ export default function MapControls() {
       </button>
       <button
         className="map-controls--button"
-        title="Delete route"
-        aria-label="Delete route"
+        title="Delete route [D]"
+        aria-label="Delete route [D]"
         disabled={drawCoords.length === 0}
         onClick={() => {
           dispatch(deleteDrawCoords(null));
@@ -141,8 +170,8 @@ export default function MapControls() {
       </button>
       <button
         className="map-controls--button"
-        title="Change line color"
-        aria-label="Change line color"
+        title="Change line color [J]"
+        aria-label="Change line color [J]"
         onClick={() => dispatch(showColorPicker(!isPickerOpen))}
       >
         <img
@@ -153,8 +182,8 @@ export default function MapControls() {
       </button>
       <button
         className="map-controls--button"
-        title="Find location"
-        aria-label="Find location"
+        title="Find location [L]"
+        aria-label="Find location [L]"
         onClick={() => setIsLocationFetching(true)}
       >
         {isLocationFetching ? (

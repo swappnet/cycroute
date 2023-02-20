@@ -1,12 +1,34 @@
 import HandIcon from '../../assets/editor/hand-icon.svg';
 import RoadIcon from '../../assets/editor/road-icon.svg';
 
+import useKeyPressed from '../../hooks/useKeyPressed';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { changeDraw } from '../../reducers/controlsReducer';
+import { useEffect } from 'react';
 
 export default function DrawType() {
+  const { code } = useKeyPressed();
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
   const dispatch = useAppDispatch();
+
+  const handleDrawChange = (e: string) => {
+    if (drawType === e) {
+      dispatch(changeDraw('None'));
+    } else if (drawType !== e && e === 'Road') {
+      dispatch(changeDraw('Road'));
+    } else if (drawType !== e && e === 'Hand') {
+      dispatch(changeDraw('Hand'));
+    }
+  };
+
+  useEffect(() => {
+    if (code === 'KeyC') {
+      handleDrawChange('Road');
+    } else if (code === 'KeyV') {
+      handleDrawChange('Hand');
+    }
+  }, [code]);
 
   return (
     <>
@@ -17,14 +39,12 @@ export default function DrawType() {
             drawType === 'Road' ? 'content-draw-box active' : 'content-draw-box'
           }
           tabIndex={0}
-          title="Follow Road"
-          aria-label="Follow Road"
+          title="Follow Road [C]"
+          aria-label="Follow Road [C]"
           role="button"
-          onClick={() =>
-            drawType === 'Road'
-              ? dispatch(changeDraw('None'))
-              : dispatch(changeDraw('Road'))
-          }
+          onClick={() => {
+            handleDrawChange('Road');
+          }}
         >
           <h3 className="content-draw-box--title">
             Follow
@@ -38,14 +58,12 @@ export default function DrawType() {
             drawType === 'Hand' ? 'content-draw-box active' : 'content-draw-box'
           }
           tabIndex={0}
-          title="Follow Hand"
-          aria-label="Follow Hand"
+          title="Follow Hand [V]"
+          aria-label="Follow Hand [V]"
           role="button"
-          onClick={() =>
-            drawType === 'Hand'
-              ? dispatch(changeDraw('None'))
-              : dispatch(changeDraw('Hand'))
-          }
+          onClick={() => {
+            handleDrawChange('Hand');
+          }}
         >
           <h3 className="content-draw-box--title">
             Follow

@@ -63,6 +63,7 @@
         }
         .banner-gradient {
           display: none;
+
           @include media($from: 'md') {
             display: block;
           }
@@ -157,7 +158,7 @@
 }
 
 .map--wrapper {
-  cursor: crosshair;
+  cursor: grab;
   width: 100%;
   position: fixed;
   top: 3.2rem;

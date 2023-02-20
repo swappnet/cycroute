@@ -4,9 +4,15 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
 import { changeLayer } from '../../reducers/controlsReducer';
 import { addLatLng } from '../../reducers/geocoderReducer';
 
+import { useEffect } from 'react';
+
+import useKeyPressed from '../../hooks/useKeyPressed';
+
 export default function Layers() {
   const layer = useAppSelector((state) => state.controlsReducer);
   const dispatch = useAppDispatch();
+
+  const { code } = useKeyPressed();
 
   const handleLayerChange = (e: string) => {
     if (e === 'toDefault') {
@@ -30,6 +36,14 @@ export default function Layers() {
     }
   };
 
+  useEffect(() => {
+    if (code === 'KeyN') {
+      handleLayerChange('toDefault');
+    } else if (code === 'KeyM') {
+      handleLayerChange('toSatellite');
+    }
+  }, [code]);
+
   return (
     <>
       <h2 className="content-section--title">Layers</h2>
@@ -38,8 +52,8 @@ export default function Layers() {
           className="content-layers-box"
           tabIndex={0}
           role="button"
-          title="Default layer"
-          aria-label="Default layer"
+          title="Default layer [N]"
+          aria-label="Default layer [N]"
           onClick={() => handleLayerChange('toDefault')}
         >
           <div
@@ -64,8 +78,8 @@ export default function Layers() {
           className="content-layers-box"
           tabIndex={0}
           role="button"
-          title="Satellite layer"
-          aria-label="Satellite layer"
+          title="Satellite layer [M]"
+          aria-label="Satellite layer [M]"
           onClick={() => handleLayerChange('toSatellite')}
         >
           <div
