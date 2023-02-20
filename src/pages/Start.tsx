@@ -1,6 +1,5 @@
 import githublogo from '../assets/startPage/githublogo.svg';
 import headerlogo from '../assets/headerlogo.svg';
-import linkedinlogo from '../assets/startPage/linkedin-icon.svg';
 import banner from '../assets/startPage/start-banner.webp';
 import preview from '../assets/startPage/main-preview.svg';
 
@@ -102,15 +101,6 @@ function StartScreen() {
         </div>
       </main>
       <footer className="footer-wrapper">
-        <a
-          href="https://www.linkedin.com/in/vladokuskov/"
-          rel="noreferrer"
-          title="Go to project GitHub"
-          className="footer-link"
-        >
-          <img alt="" src={linkedinlogo} className="link-icon" />
-          LinkedIn
-        </a>
         <a
           href="https://github.com/swappnet/cycroute"
           rel="noreferrer"
