@@ -12,6 +12,8 @@ export default function Geocoder() {
 
   const dispatch = useDispatch();
 
+  let geoResult;
+
   const handleChangeGeocoder = (
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -24,6 +26,7 @@ export default function Geocoder() {
 
   const handleClear = () => {
     setGeocoderValue('');
+    setGeocoderResponse([]);
   };
 
   const handleSubmit = (e: React.FormEvent): void => {
@@ -37,9 +40,8 @@ export default function Geocoder() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      data.features.length > 0
-        ? setGeocoderResponse(data.features)
-        : setGeocoderResponse('Nothing found');
+
+      setGeocoderResponse(data.features);
       setIsGeocoderLoading(false);
       setIsResultsOpen(true);
     } catch (err) {
@@ -54,7 +56,7 @@ export default function Geocoder() {
           fetchGeoData();
         }, 400);
         return () => clearTimeout(timer);
-      } else if (geocoderValue.length === 0) {
+      } else if (geocoderValue.length < 3) {
         setGeocoderResponse([]);
       }
     }
@@ -76,8 +78,6 @@ export default function Geocoder() {
       document.removeEventListener('mousedown', checkIfClickedOutside);
     };
   }, [isResultsOpen]);
-
-  let geoResult;
 
   if (geocoderResponse) {
     geoResult = geocoderResponse
