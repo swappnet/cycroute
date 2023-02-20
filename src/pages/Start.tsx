@@ -56,8 +56,10 @@ function StartScreen() {
                 onChange={() => {
                   if (darkMode === 'dark') {
                     dispatch(switchDark('light'));
+                    localStorage.setItem('theme', 'light');
                   } else if (darkMode === 'light') {
                     dispatch(switchDark('dark'));
+                    localStorage.setItem('theme', 'dark');
                   }
                 }}
               />
