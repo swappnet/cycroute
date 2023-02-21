@@ -29,40 +29,19 @@ function StartScreen() {
             </div>
           </div>
           <div className="header-buttons-wrapper">
-            <NavLink
-              to="/Editor"
-              className="header-button start-button"
-              title={
-                drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
-              }
-              aria-label={
-                drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
-              }
-            >
-              {drawCoords.length > 0 ? (
-                ''
-              ) : (
-                <div className="gg-add-r header-button-icon-wrapper" />
-              )}
-              <p className="header-button-title">
-                {drawCoords.length > 0 ? 'Continue' : 'NEW ROUTE'}
-              </p>
-            </NavLink>
-            <>
-              <input
-                className="toggle"
-                type="checkbox"
-                onChange={() => {
-                  if (darkMode === 'dark') {
-                    dispatch(switchDark('light'));
-                    localStorage.setItem('theme', 'light');
-                  } else if (darkMode === 'light') {
-                    dispatch(switchDark('dark'));
-                    localStorage.setItem('theme', 'dark');
-                  }
-                }}
-              />
-            </>
+            <input
+              className="toggle"
+              type="checkbox"
+              onChange={() => {
+                if (darkMode === 'dark') {
+                  dispatch(switchDark('light'));
+                  localStorage.setItem('theme', 'light');
+                } else if (darkMode === 'light') {
+                  dispatch(switchDark('dark'));
+                  localStorage.setItem('theme', 'dark');
+                }
+              }}
+            />
           </div>
         </div>
       </header>
@@ -92,6 +71,11 @@ function StartScreen() {
                 drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
               }
             >
+              {drawCoords.length > 0 ? (
+                ''
+              ) : (
+                <div className="gg-add-r header-button-icon-wrapper" />
+              )}
               {drawCoords.length > 0 ? 'Continue editing' : 'NEW ROUTE'}
             </NavLink>
           </section>
