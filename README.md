@@ -1,17 +1,37 @@
-# CYCROUTE
+# cycroute
 
-CYCROUTE - website to create bike routes and export them in GPX/KML format.
+[![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://cycroute.netlify.app/)
 
-## Features
+`cycroute` - website to create bike routes and export them in GPX/KML format.
 
-- Search location (geocoder)
-- Change map styles
-- Change route draw styles
-- Undo, Redo, Clear All, Find location
-- Export GPX/KML
-- Change route color
+Contents
+========
 
-## TO-DO
+ * [Why?](#why)
+ * [Usage](#usage)
+ * [TO-DO](#TO-DO)
+
+### Why?
+
+I wanted a website that allows you to:
+
++ Create bike tracks and export them as GPX/KML file format;
++ Be able to create tracks by calculating very detailed route or create route by own hand;
++ Save tracks in your account and open them in the future when you want;
++ Search your location & create tracks where you live;
+
+### Usage
+---
+
+To create track, simply press `New route` button on home page.
+
+When you clicked button, you can see a main menu with controls, that allow you to change `Draw Type` or change `Layers`. Also there you can find input field to search your location and create route where you want very fast. In the bottom you can export track when format selected and route is created in `GPX or KML` format. 
+
+In the another place you can see rounded buttons. You can use `Undo` to undo action, or `Redo` to take step back, also there you can find `Delete` button that clear all waypoints, `Color Picker` - change track color, `Location` - search your geolocation.
+
+
+### TO-DO
+---
 
 - ~~Migrate project to TypeScript~~;
 - ~~Add start page~~;
@@ -21,13 +41,8 @@ CYCROUTE - website to create bike routes and export them in GPX/KML format.
 - Add elevation High/Low to Defatils section;
 - ~~Add keyboard shortcuts~~;
 
-## Tech
-
-- [React]
-- [Vite]
-- [React Redux, Toolkit]
-- [Leaflet]
 
 Live Demo - https://cycroute.netlify.app/
 
-![](src/assets/mockup1.png)
+<h4>Liked the work ?</h4>
+Give the repository a star :-)
