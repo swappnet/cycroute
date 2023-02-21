@@ -1,5 +1,5 @@
-import HandIcon from '../../assets/editor/hand-icon.svg';
-import RoadIcon from '../../assets/editor/road-icon.svg';
+import { ReactComponent as HandIcon } from '../../assets/editor/hand-icon.svg';
+import { ReactComponent as RoadIcon } from '../../assets/editor/road-icon.svg';
 
 import useKeyPressed from '../../hooks/useKeyPressed';
 
@@ -51,7 +51,7 @@ export default function DrawType() {
             <br />
             Road
           </h3>
-          <img className="content-draw-box--icon" src={RoadIcon} alt="" />
+          <RoadIcon className="content-draw-box--icon" />
         </div>
         <div
           className={
@@ -70,7 +70,7 @@ export default function DrawType() {
             <br />
             Hand
           </h3>
-          <img className="content-draw-box--icon" src={HandIcon} alt="" />
+          <HandIcon className="content-draw-box--icon" />
         </div>
       </div>
     </>

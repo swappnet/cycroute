@@ -25,7 +25,7 @@ const options = [
 ];
 
 const customStyles: StylesConfig<SelectOptionType, false> = {
-  option: (base, { data, isDisabled, isFocused, isSelected }) => {
+  option: (base, { isFocused }) => {
     return {
       ...base,
       backgroundColor: isFocused ? 'rgba(255, 255, 255, 0.31)' : '',

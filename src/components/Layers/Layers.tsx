@@ -56,13 +56,6 @@ export default function Layers() {
           aria-label="Default layer [N]"
           onClick={() => handleLayerChange('toDefault')}
         >
-          <div
-            className={
-              layer.layer === 'default'
-                ? 'content-layers-box--icon--bg active'
-                : 'content-layers-box--icon--bg'
-            }
-          />
           <p
             className={
               layer.layer === 'default'
@@ -82,13 +75,6 @@ export default function Layers() {
           aria-label="Satellite layer [M]"
           onClick={() => handleLayerChange('toSatellite')}
         >
-          <div
-            className={
-              layer.layer === 'satellite'
-                ? 'content-layers-box--icon--bg active'
-                : 'content-layers-box--icon--bg'
-            }
-          />
           <p
             className={
               layer.layer === 'satellite'

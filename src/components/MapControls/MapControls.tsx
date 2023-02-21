@@ -4,8 +4,10 @@ import {
   undoDrawCoords,
 } from '../../reducers/drawReducer';
 
-import colorPicker from '../../assets/editor/picker.svg';
-import colorPickerL from '../../assets/editor/pickerL.svg';
+import { ReactComponent as ColorPicker } from '../../assets/editor/picker.svg';
+import { ReactComponent as ColorPickerL } from '../../assets/editor/pickerL.svg';
+import { ReactComponent as Delete } from '../../assets/editor/deleteD.svg';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addLatLng } from '../../reducers/geocoderReducer';
 import {
@@ -15,8 +17,6 @@ import {
 import { updateDrawInfo } from '../../reducers/drawReducer';
 import { showColorPicker } from '../../reducers/controlsReducer';
 import useKeyPressed from '../../hooks/useKeyPressed';
-
-import deleteD from '../../assets/editor/deleteD.svg';
 
 import { useState, useEffect } from 'react';
 
@@ -158,9 +158,7 @@ export default function MapControls() {
           );
         }}
       >
-        <img
-          src={deleteD}
-          alt=""
+        <Delete
           className={
             drawCoords.length !== 0
               ? 'map-controls--icon  active'
@@ -174,11 +172,11 @@ export default function MapControls() {
         aria-label="Change line color [J]"
         onClick={() => dispatch(showColorPicker(!isPickerOpen))}
       >
-        <img
-          src={theme === 'light' ? colorPickerL : colorPicker}
-          alt=""
-          className="map-controls--icon color-picker--icon"
-        />
+        {theme === 'light' ? (
+          <ColorPickerL className="map-controls--icon color-picker--icon" />
+        ) : (
+          <ColorPicker className="map-controls--icon color-picker--icon" />
+        )}
       </button>
       <button
         className="map-controls--button"

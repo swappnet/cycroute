@@ -218,14 +218,6 @@
     position: relative;
 
     @include on-hover {
-      .content-layers-box--icon--bg {
-        background: linear-gradient(
-          180deg,
-          themed(div-1) 10%,
-          rgba(0, 212, 255, 0) 100%
-        );
-        opacity: 0.8;
-      }
       .content-layers-box--title {
         background: #a3d168;
         transition: 0.2s;
@@ -236,22 +228,6 @@
       width: 100%;
       height: 100%;
       border-radius: 10px;
-    }
-    .content-layers-box--icon--bg {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      border-radius: 10px;
-      z-index: 1002;
-      &.active {
-        background: linear-gradient(
-          180deg,
-          themed(div-1) 10%,
-          rgba(0, 212, 255, 0) 100%
-        );
-        opacity: 0.8;
-        cursor: default;
-      }
     }
   }
 }
@@ -281,8 +257,8 @@
       }
     }
     .content-draw-box--icon {
-      max-width: 50px;
-      max-height: 50px;
+      max-width: 3rem;
+      max-height: 3rem;
       width: 100%;
     }
   }

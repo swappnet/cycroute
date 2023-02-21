@@ -28,7 +28,8 @@
     "react-router-dom": "^6.8.1",
     "react-select": "^5.7.0",
     "redux": "^4.2.1",
-    "regenerator-runtime": "^0.13.11"
+    "regenerator-runtime": "^0.13.11",
+    "vite-plugin-svgr": "^2.4.0"
   },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
