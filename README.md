@@ -43,3 +43,6 @@ In the another place you can see rounded buttons. You can use `Undo` to undo act
 
 
 Live Demo - https://cycroute.netlify.app/
+
+<h4>Liked the work ?</h4>
+Give the repository a star :-)
