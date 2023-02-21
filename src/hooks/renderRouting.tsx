@@ -1,7 +1,9 @@
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
+
+import { useLocation } from 'react-router';
 
 import { updateDrawInfo, updateExportCoords } from '../reducers/drawReducer';
 import { useAppSelector, useAppDispatch } from './redux-hooks';
@@ -12,6 +14,8 @@ const useRenderRouting = (e: L.Map | null) => {
   let key = import.meta.env.VITE_MAPBOX_API;
 
   const dispatch = useAppDispatch();
+
+  const location = useLocation();
 
   const lineColor = useAppSelector(
     (state) => state.controlsReducer.colorPicker.color
@@ -54,7 +58,7 @@ const useRenderRouting = (e: L.Map | null) => {
         }
       };
     }
-  }, [e, drawCoords, lineColor]);
+  }, [e, drawCoords, lineColor, location]);
 
   useEffect(() => {
     if (!routingMachine) return;

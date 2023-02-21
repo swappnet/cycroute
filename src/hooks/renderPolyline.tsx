@@ -1,6 +1,8 @@
 import { useAppDispatch, useAppSelector } from './redux-hooks';
 import { useState, useEffect } from 'react';
 
+import { useLocation } from 'react-router-dom';
+
 import GeoUtil from 'leaflet-geometryutil';
 
 import * as L from 'leaflet';
@@ -15,7 +17,7 @@ const useRenderPolyline = (e: L.Map | null) => {
   );
 
   const dispatch = useAppDispatch();
-
+  const location = useLocation();
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null);
 
   useEffect((): ReturnType<L.Polyline | any> => {
@@ -45,7 +47,7 @@ const useRenderPolyline = (e: L.Map | null) => {
         drawPolyline.remove();
       }
     }
-  }, [drawPolyline, drawType, e]);
+  }, [drawPolyline, drawType, e, location]);
 
   useEffect(() => {
     if (!drawPolyline) return;
