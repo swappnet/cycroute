@@ -58,7 +58,7 @@ export default function MapControls() {
       addLatLng({
         lat: data.coords.latitude,
         lng: data.coords.longitude,
-        zoom: 12,
+        zoom: 16,
       })
     );
     dispatch(
@@ -66,7 +66,7 @@ export default function MapControls() {
         currentCoords: {
           lat: data.coords.latitude,
           lng: data.coords.longitude,
-          zoom: 12,
+          zoom: 16,
         },
       })
     );

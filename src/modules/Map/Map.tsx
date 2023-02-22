@@ -17,6 +17,7 @@ import { MapContainer, ZoomControl } from 'react-leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 import { useAppSelector } from '../../hooks/redux-hooks';
+import LocationMarker from './LocationMarker';
 
 export default function Map() {
   const [map, setMap] = useState<L.Map | null>(null); // Create map Ref with state
@@ -29,7 +30,6 @@ export default function Map() {
   useRenderMarkers(map);
   //---HooksEnd---
 
-  const drawType = useAppSelector((state) => state.controlsReducer.draw);
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
   const layer = useAppSelector((state) => state.controlsReducer);
 
@@ -47,6 +47,7 @@ export default function Map() {
       >
         <StyleMap />
         <GetPositionByDragging />
+        <LocationMarker />
         <ZoomControl position="bottomright" />
       </MapContainer>
     ),
