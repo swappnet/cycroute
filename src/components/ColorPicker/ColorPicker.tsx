@@ -19,6 +19,11 @@ const ColorPicker = () => {
 
   const dispatch = useAppDispatch();
 
+  const handleSubmitColor = () => {
+    dispatch(changeLineColor(color));
+    dispatch(showColorPicker(false));
+  };
+
   if (isPickerOpen) {
     return (
       <div className="picker-wrapper">
@@ -41,7 +46,7 @@ const ColorPicker = () => {
           className="picker-submit-button"
           title="Submit color"
           aria-label="Sumbit color"
-          onClick={() => dispatch(changeLineColor(color))}
+          onClick={handleSubmitColor}
         >
           Submit
         </button>
