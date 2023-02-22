@@ -42,7 +42,7 @@ const useRenderRouting = (e: L.Map | null) => {
         show: false,
         routeWhileDragging: false,
         lineOptions: {
-          styles: [{ color: lineColor, opacity: 1, weight: 4 }],
+          styles: [{ color: lineColor, opacity: 1, weight: 6 }],
           extendToWaypoints: true,
           missingRouteTolerance: 0,
           addWaypoints: false,

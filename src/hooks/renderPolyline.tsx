@@ -26,7 +26,7 @@ const useRenderPolyline = (e: L.Map | null) => {
     if (e) {
       const polyline = L.polyline(drawCoords as any, {
         color: lineColor,
-        weight: 4,
+        weight: 6,
       });
 
       if (polyline) {
