@@ -39,7 +39,7 @@ html {
 
 *:focus:not(:focus-visible) {
   outline: none;
-  box-shadow: 0 0 0 3px #a3d168;
+  box-shadow: none;
 }
 *:focus-visible {
   box-shadow: 0 0 0 3px #a3d168;
