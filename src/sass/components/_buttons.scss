@@ -317,11 +317,12 @@ body {
     font-family: $primary-font;
     font-weight: 500;
     cursor: pointer;
-    color: themed(button-0);
-    background: themed(text-6);
-    width: 100%;
+    color: #fff;
+    background: #a3d168;
+    width: 90%;
+    margin-bottom: 0.5rem;
     padding: 0.6rem 0;
     border: 0px;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
   }
 }
