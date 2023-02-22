@@ -39,10 +39,11 @@ html {
 
 *:focus:not(:focus-visible) {
   outline: none;
+  box-shadow: 0 0 0 3px #a3d168;
 }
 *:focus-visible {
-  outline: 0.13rem solid #bedb94;
-  outline-offset: 0.125rem;
+  box-shadow: 0 0 0 3px #a3d168;
+  outline: none;
 }
 
 .lazyload,

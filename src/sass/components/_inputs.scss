@@ -32,13 +32,18 @@
       height: 40px;
       text-align: start;
       font-size: 16px;
+
       &::placeholder {
         color: themed(input-8);
         font-family: $primary-font;
         font-weight: 400;
       }
+      &:focus {
+        box-shadow: 0 0 0 3px #a3d168;
+      }
       &:focus-visible {
-        outline: auto !important;
+        outline: none !important;
+        box-shadow: 0 0 0 3px #a3d168;
       }
     }
 
