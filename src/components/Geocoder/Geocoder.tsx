@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { addLatLng } from '../../reducers/geocoderReducer';
-import { changeCurrentCoords } from '../../reducers/controlsReducer';
+import {
+  changeCurrentCoords,
+  changeLocationStatus,
+} from '../../reducers/controlsReducer';
 
 export default function Geocoder() {
   const ref = useRef<HTMLFormElement>(null);
@@ -106,6 +109,7 @@ export default function Geocoder() {
                       },
                     })
                   );
+                  dispatch(changeLocationStatus(false));
                   window.scrollTo(0, 0);
                   setIsResultsOpen(false);
                 }}
