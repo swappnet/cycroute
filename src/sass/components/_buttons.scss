@@ -141,7 +141,8 @@
     height: 40px;
     cursor: pointer;
     background-color: themed(button-0);
-    padding: 0.7em;
+    color: themed(icon-0);
+    padding: 0.55rem;
     border-radius: 50%;
     border: none;
     @include flexCenter(column, 0);

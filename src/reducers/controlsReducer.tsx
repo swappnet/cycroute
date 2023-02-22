@@ -5,6 +5,7 @@ interface IControlsReducer {
   draw: string;
   layer: string;
   darkMode: string;
+  isFitBounds: boolean;
   isLocationFound: boolean;
   colorPicker: { color: string; isOpen: boolean };
   currentCoords: { lat: number; lng: number };
@@ -15,6 +16,7 @@ const initialState: IControlsReducer = {
   layer: 'default',
   darkMode: 'light',
   isLocationFound: false,
+  isFitBounds: false,
   colorPicker: { color: '#00ACC1', isOpen: false },
   currentCoords: {
     lat: 50.45,
@@ -26,6 +28,12 @@ export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
+    changeFitBounds: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isFitBounds: action.payload,
+      };
+    },
     changeLocationStatus: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
@@ -87,5 +95,6 @@ export const {
   changeLineColor,
   showColorPicker,
   changeLocationStatus,
+  changeFitBounds,
 } = controlsReducer.actions;
 export default controlsReducer.reducer;

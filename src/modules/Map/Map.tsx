@@ -18,6 +18,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 import { useAppSelector } from '../../hooks/redux-hooks';
 import LocationMarker from './LocationMarker';
+import useFitBoundsOnClick from '../../hooks/fitBounds';
 
 export default function Map() {
   const [map, setMap] = useState<L.Map | null>(null); // Create map Ref with state
@@ -28,6 +29,7 @@ export default function Map() {
   useRenderRouting(map);
   useRenderPolyline(map);
   useRenderMarkers(map);
+  useFitBoundsOnClick(map);
   //---HooksEnd---
 
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer);

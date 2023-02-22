@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addLatLng } from '../../reducers/geocoderReducer';
 import {
   changeCurrentCoords,
+  changeFitBounds,
   changeLocationStatus,
 } from '../../reducers/controlsReducer';
 import { updateDrawInfo } from '../../reducers/drawReducer';
@@ -19,6 +20,7 @@ import { showColorPicker } from '../../reducers/controlsReducer';
 import useKeyPressed from '../../hooks/useKeyPressed';
 
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 
 const options = {
   enableHighAccuracy: true,
@@ -39,6 +41,8 @@ export default function MapControls() {
 
   const { code } = useKeyPressed();
 
+  const location = useLocation();
+
   const isPickerOpen = useAppSelector(
     (state) => state.controlsReducer.colorPicker.isOpen
   );
@@ -48,6 +52,20 @@ export default function MapControls() {
   const drawCoordsFuture = useAppSelector(
     (state) => state.drawReducer.drawCoordsFuture
   );
+
+  const handleDelete = () => {
+    dispatch(deleteDrawCoords(null));
+    dispatch(
+      updateDrawInfo({
+        time: '0000',
+        dist: '0000',
+      })
+    );
+  };
+
+  const handleRouteFit = () => {
+    dispatch(changeFitBounds(true));
+  };
 
   const getPos = (data: {
     coords: { latitude: number; longitude: number };
@@ -107,6 +125,10 @@ export default function MapControls() {
     }
   }, [code]);
 
+  useEffect(() => {
+    handleDelete();
+  }, [location]);
+
   return (
     <div className="map-controls--wrapper">
       <button
@@ -149,13 +171,7 @@ export default function MapControls() {
         aria-label="Delete route [D]"
         disabled={drawCoords.length === 0}
         onClick={() => {
-          dispatch(deleteDrawCoords(null));
-          dispatch(
-            updateDrawInfo({
-              time: '0000',
-              dist: '0000',
-            })
-          );
+          handleDelete();
         }}
       >
         <Delete
@@ -177,6 +193,21 @@ export default function MapControls() {
         ) : (
           <ColorPicker className="map-controls--icon color-picker--icon" />
         )}
+      </button>
+      <button
+        className="map-controls--button"
+        title="Fit route"
+        aria-label="Fit route"
+        disabled={drawCoords.length === 0}
+        onClick={handleRouteFit}
+      >
+        <i
+          className={
+            drawType === 'None' || drawCoords.length === 0
+              ? `gg-maximize map-controls--icon disabled`
+              : `gg-maximize map-controls--icon`
+          }
+        ></i>
       </button>
       <button
         className="map-controls--button"
