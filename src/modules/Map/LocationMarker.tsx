@@ -2,9 +2,10 @@ import { Circle } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../hooks/redux-hooks';
+import { LatLngExpression } from 'leaflet';
 
 function LocationMarker() {
-  const [position, setPosition] = useState<any>(null);
+  const [position, setPosition] = useState<LatLngExpression | null>(null);
 
   const isLocationFound = useAppSelector(
     (state) => state.controlsReducer.isLocationFound
