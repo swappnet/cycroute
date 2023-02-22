@@ -1,4 +1,4 @@
-import { Circle, useMapEvents } from 'react-leaflet';
+import { Circle } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../hooks/redux-hooks';
