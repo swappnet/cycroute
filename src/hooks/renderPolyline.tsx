@@ -23,6 +23,7 @@ const useRenderPolyline = (e: L.Map | null) => {
   useEffect((): ReturnType<L.Polyline | any> => {
     if (!e) return;
 
+    // Define polyline
     if (e) {
       const polyline = L.polyline(drawCoords as any, {
         color: lineColor,
@@ -40,6 +41,7 @@ const useRenderPolyline = (e: L.Map | null) => {
     if (!drawPolyline) return;
 
     if (e) {
+      // If Draw type is 'Hand' add polyline to map
       if (drawPolyline && drawType === 'Hand') {
         drawPolyline.addTo(e);
         dispatch(updateExportCoords(drawCoords));
@@ -53,6 +55,7 @@ const useRenderPolyline = (e: L.Map | null) => {
     if (!drawPolyline) return;
 
     if (drawPolyline && drawType === 'Hand') {
+      // Calculate polyline avg time and avg distance with GeoUtil
       const polylineDist = GeoUtil.accumulatedLengths(drawPolyline);
       for (let i = 0; i < polylineDist.length; i++) {
         dispatch(

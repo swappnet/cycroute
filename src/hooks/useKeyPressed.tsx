@@ -10,6 +10,7 @@ const useKeyPressed = () => {
   });
 
   useEffect(() => {
+    // Checking if input is open or not, and if not open pass key to keyPressed state
     const handleKeyDown = (e: KeyboardEvent) => {
       const isInputField = e.target instanceof HTMLInputElement;
       if (!isInputField) {
@@ -17,6 +18,7 @@ const useKeyPressed = () => {
       }
     };
 
+    // If key is up, reset keyPressed state
     const handleKeyUp = () => {
       setKeyPressed({ key: '', code: undefined });
     };
@@ -25,6 +27,7 @@ const useKeyPressed = () => {
     window.addEventListener('keyup', handleKeyUp);
 
     return () => {
+      // Clear listeners
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };

@@ -8,6 +8,7 @@ import {
 function GetPositionByDragging() {
   const dispatch = useAppDispatch();
   useMapEvents({
+    // When map is dragged get coords of map center and change current coords
     drag: (e: L.LeafletEvent) => {
       dispatch(
         changeCurrentCoords({
@@ -20,6 +21,7 @@ function GetPositionByDragging() {
       );
     },
     dragstart: () => {
+      // reset location status when drag starts
       dispatch(changeLocationStatus(false));
     },
   });

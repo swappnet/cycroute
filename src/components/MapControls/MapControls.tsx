@@ -22,9 +22,10 @@ import useKeyPressed from '../../hooks/useKeyPressed';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 
+// Options for navigator geolocation
 const options = {
   enableHighAccuracy: true,
-  timeout: 5000,
+  timeout: 5000, // Find location for 5 sec
   maximumAge: 0,
 };
 
@@ -53,6 +54,7 @@ export default function MapControls() {
     (state) => state.drawReducer.drawCoordsFuture
   );
 
+  // Delete route from map
   const handleDelete = () => {
     dispatch(deleteDrawCoords(null));
     dispatch(
@@ -63,10 +65,12 @@ export default function MapControls() {
     );
   };
 
+  // Fit route on the map
   const handleRouteFit = () => {
     dispatch(changeFitBounds(true));
   };
 
+  // Get position of navigator geolocation
   const getPos = (data: {
     coords: { latitude: number; longitude: number };
   }) => {
@@ -90,18 +94,21 @@ export default function MapControls() {
     );
   };
 
-  function error(err: { code: number; message: string }) {
+  // Throw error when can`t find position
+  const error = (err: { code: number; message: string }) => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     setIsLocationFetching(false);
-  }
+  };
 
   useEffect(() => {
+    // When isLocationFetching is true, fetch position
     if (isLocationFetching) {
       navigator.geolocation.getCurrentPosition(getPos, error, options);
     }
   }, [isLocationFetching]);
 
   useEffect(() => {
+    // Define keys and do actions when keyCode is pressed
     if (code === 'KeyQ') {
       dispatch(undoDrawCoords(null));
     }
@@ -126,6 +133,7 @@ export default function MapControls() {
   }, [code]);
 
   useEffect(() => {
+    // When pathname(location) is changing clear route from map
     handleDelete();
   }, [location]);
 

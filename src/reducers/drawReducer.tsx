@@ -14,11 +14,11 @@ interface IDrawReducer {
 }
 
 const initialState: IDrawReducer = {
-  drawInfo: { time: '0000', dist: '0000' },
-  drawCoords: [],
-  exportCoords: [],
-  drawCoordsDeleted: [],
-  drawCoordsFuture: [],
+  drawInfo: { time: '0000', dist: '0000' }, // Value that displayed on Details section
+  drawCoords: [], // Coords that used for rendering Markers & polyline
+  exportCoords: [], // Coords that are saved under the hood and user can export them
+  drawCoordsDeleted: [], // Coords that are deleted
+  drawCoordsFuture: [], // Coords that can be recovered
 };
 
 export const drawReducer = createSlice({

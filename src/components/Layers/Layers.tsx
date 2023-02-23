@@ -15,6 +15,7 @@ export default function Layers() {
   const { code } = useKeyPressed();
 
   const handleLayerChange = (e: string) => {
+    // Handle layer change by conditions
     if (e === 'toDefault') {
       dispatch(
         addLatLng({

@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/redux-hooks';
 import { LatLngExpression } from 'leaflet';
 
 function LocationMarker() {
-  const [position, setPosition] = useState<LatLngExpression | null>(null);
+  const [position, setPosition] = useState<LatLngExpression | null>(null); // Set position when location is found
 
   const isLocationFound = useAppSelector(
     (state) => state.controlsReducer.isLocationFound
@@ -27,6 +27,7 @@ function LocationMarker() {
   }, [isLocationFound, currentCoords]);
 
   function LocationMarkerInner() {
+    // Return a circle component when location is found and position is not equal to null
     return position === null ? null : (
       <Circle center={position} radius={120} fillOpacity={0.5} />
     );

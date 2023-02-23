@@ -14,6 +14,7 @@ const useRenderMarkers = (e: L.Map | null) => {
     const markersLayer = L.layerGroup();
     if (e) {
       drawCoords.forEach((coords: any, i) => {
+        // Make conditions when render Start, Middle and Finish markers
         let lastIndex = drawCoords.length - 1;
         if (i === 0) {
           return L.marker(coords, {

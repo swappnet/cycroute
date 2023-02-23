@@ -84,6 +84,7 @@ export default function Geocoder() {
 
   if (geocoderResponse) {
     geoResult = geocoderResponse
+      // Get only first three items from Array
       .slice(0, 3)
       .map(
         (item: {

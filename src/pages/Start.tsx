@@ -11,7 +11,7 @@ import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 const date = new Date();
-const year = date.getFullYear();
+const year = date.getFullYear(); // Get current year and save in variable
 
 function StartScreen() {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
@@ -65,6 +65,7 @@ function StartScreen() {
               to="/Editor"
               className="info-button start-button"
               title={
+                // Checking if route is existing or not and display btn text by condition
                 drawCoords.length > 0 ? 'Continue editing' : 'Create new route'
               }
               aria-label={

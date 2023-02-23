@@ -14,6 +14,7 @@ const useFitBoundsOnClick = (e: L.Map | null) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // When isFitBounds state is true, change map view
     if (e && isFitBounds) {
       e.fitBounds(drawCoords as L.LatLngBoundsExpression);
       dispatch(changeFitBounds(false));

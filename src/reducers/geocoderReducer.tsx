@@ -6,6 +6,7 @@ export interface IGeocoderReducer {
   zoom?: number;
 }
 
+// Coords that used for map view, or center props in MapContainer
 const initialState: IGeocoderReducer = {
   lat: 50.45,
   lng: 30.5241,

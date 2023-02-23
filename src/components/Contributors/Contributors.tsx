@@ -7,6 +7,7 @@ const Contributors = () => {
     setIsContrShown(true);
 
     const timer: number = window.setTimeout(() => {
+      // Show contributors for 1.5 s
       setIsContrShown(false);
     }, 1500);
     return () => clearTimeout(timer);

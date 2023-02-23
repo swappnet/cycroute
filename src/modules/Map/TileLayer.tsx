@@ -3,11 +3,12 @@ import { TileLayer } from 'react-leaflet';
 import { useAppSelector } from '../../hooks/redux-hooks';
 
 function StyleMap() {
-  const [mapUrl, setMapUrl] = useState<string>('');
+  const [mapUrl, setMapUrl] = useState<string>(''); // Link to tile layer, by default is empty
   const darkMode = useAppSelector((state) => state.controlsReducer.darkMode);
   const layer = useAppSelector((state) => state.controlsReducer);
 
   useMemo(() => {
+    // Checks if theme is dark or not & set new map url by condition
     if (layer.layer === 'default') {
       darkMode === 'dark'
         ? setMapUrl(
@@ -23,6 +24,7 @@ function StyleMap() {
     }
   }, [layer.layer]);
 
+  // Return react leaflet TileLayer component with custom map url
   return <TileLayer url={mapUrl} />;
 }
 

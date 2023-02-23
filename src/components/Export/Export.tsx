@@ -20,6 +20,7 @@ enum ExportType {
 type SelectOptionType = { value: string | number; label: string };
 
 const options = [
+  // Options for react select
   { value: 1, label: 'GPX' },
   { value: 2, label: 'KML' },
 ];
@@ -39,10 +40,11 @@ export default function Export() {
   );
 
   const [filename, setFilename] = useState<string>('');
-  const [exportType, setExportType] = useState(ExportType.none);
+  const [exportType, setExportType] = useState(ExportType.none); // none, gpx, kml
 
   const handleChange = (option: SelectOptionType | null) => {
     if (option) {
+      //change exportType on react select changing
       if (option.value === 1) {
         setExportType(ExportType.gpx);
       } else if (option.value === 2) {
@@ -51,6 +53,7 @@ export default function Export() {
     }
   };
 
+  // Function that generate gpx file with dynamic filenames and coords
   const generateGPX = (coords: IDrawCoords[]) => {
     let gpx = `<?xml version="1.0" encoding="UTF-8"?>
   <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycroute.netlify.app/">
@@ -87,6 +90,7 @@ export default function Export() {
     return gpx;
   };
 
+  // Function that generate kml file with dynamic filenames and coords
   const generateKML = (coords: IDrawCoords[]) => {
     let kml = `<?xml version="1.0" encoding="UTF-8"?>
     <kml xmlns="http://www.opengis.net/kml/2.2">
@@ -139,6 +143,7 @@ export default function Export() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
 
   const handleFilename = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Change file name when user type in input
     setFilename(e.target.value);
   };
 

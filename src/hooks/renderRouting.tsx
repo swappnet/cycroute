@@ -11,6 +11,8 @@ import { useAppSelector, useAppDispatch } from './redux-hooks';
 const useRenderRouting = (e: L.Map | null) => {
   const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
   const RoutingMachineRef = useRef<L.Control | null>(null);
+
+  // Import api key for mapbox api from env
   let key = import.meta.env.VITE_MAPBOX_API;
 
   const dispatch = useAppDispatch();
@@ -27,6 +29,7 @@ const useRenderRouting = (e: L.Map | null) => {
   useEffect(() => {
     if (!e) return;
     if (e) {
+      // Removing default markers from router
       const plan = new L.Routing.Plan(drawCoords as any, {
         createMarker: function () {
           return false;
@@ -52,6 +55,8 @@ const useRenderRouting = (e: L.Map | null) => {
       });
 
       setRoutingMachine(RoutingMachineRef.current);
+
+      // Remove routing machine on every update
       return () => {
         if (RoutingMachineRef.current) {
           e.removeControl(RoutingMachineRef.current);
@@ -65,6 +70,7 @@ const useRenderRouting = (e: L.Map | null) => {
     if (!e) return;
 
     if (e) {
+      // Create routing machine when draw type is 'Road'
       if (routingMachine && drawType === 'Road') {
         e.removeControl(routingMachine);
         routingMachine.addTo(e);
@@ -78,13 +84,16 @@ const useRenderRouting = (e: L.Map | null) => {
     if (!routingMachine) return;
 
     if (routingMachine) {
+      // When route is found update Details section with avg Time and avg Distance
       (routingMachine as any).on('routesfound', function (e: any) {
         dispatch(
           updateDrawInfo({
+            // Display only 2 characters after comma
             time: (e.routes[0].summary.totalTime / 3600).toFixed(2),
             dist: (e.routes[0].summary.totalDistance / 1000).toFixed(1),
           })
         );
+        // Update export coords with coords from router
         dispatch(updateExportCoords(e.routes[0].coordinates));
       });
     }
