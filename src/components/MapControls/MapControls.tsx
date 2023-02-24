@@ -68,7 +68,7 @@ export default function MapControls() {
   // Fit route on the map
   const handleRouteFit = () => {
     dispatch(changeFitBounds(true));
-    dispatch(changeLocationStatus(true));
+    dispatch(changeLocationStatus(false));
   };
 
   // Get position of navigator geolocation
