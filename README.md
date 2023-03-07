@@ -2,7 +2,7 @@
 
 [![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://cycroute.netlify.app/)
 
-`cycroute` - web application to create bike routes and export them in GPX format.
+`cycroute` - web application to create bike routes and export them in GPX/KML format.
 
 Contents
 ========
